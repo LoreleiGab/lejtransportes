@@ -1,3 +1,36 @@
+<?php
+$con = bancoMysqli();
+
+if(isset($_POST['adicionar']))
+{
+	$nome = $_POST['nome'];
+	$rg = $_POST['rg'];
+	$cpf = $_POST['cpf'];
+	$telefone1 = $_POST['telefone1'];
+	$telefone2 = $_POST['telefone2'];
+	$email = $_POST['email'];
+	$endereco = $_POST['endereco'];
+	$numero = $_POST['numero'];
+	$complemento = $_POST['complemento'];
+	$bairro = $_POST['bairro'];
+	$cidade = $_POST['cidade'];
+	$estado = $_POST['estado'];
+	$cep = $_POST['cep'];
+	$ponto = $_POST['ponto'];
+	$forma_pagamento = $_POST['forma_pagamento'];
+	$observacao = $_POST['observacao'];
+
+	$sql = "INSERT INTO `pf`(`nome`, `cpf`, `rg`, `cep`, `endereco`, `bairro`, `cidade`, `estado`, `numero`, `complemento`, `telefone01`, `telefone02`, `email`, `fixo`, `forma_pagamento`, `obs`) VALUES ('$nome', '$cpf', '$rg', '$cep', '$endereco', '$bairro', '$cidade', '$estado', '$numero', '$complemento', '$telefone1', '$telefone2', '$email', '$ponto', '$forma_pagamento', '$observacao')";
+	if(mysqli_query($con,$sql))
+	{
+		$mensagem = "<font color='#01DF3A'><strong>Cadastrado com sucesso!</strong></font>";
+	}
+	else
+	{
+		$mensagem = "<font color='#FF0000'><strong>Erro ao cadastrar! Tente novamente.</strong></font>";
+	}
+}
+?>
 <section id="list_items" class="home-section bg-white">
 	<div class="container"><?php include 'includes/menu.php'; ?>
 		<p align="left"><strong><?php echo saudacao(); ?>, <?php echo $_SESSION['nome']; ?>!</strong></p>
@@ -7,11 +40,11 @@
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
 				<h5><?php if(isset($mensagem)){echo $mensagem;};?></h5>
-				<form class="form-horizontal" role="form" action="?perfil=artista_pj_cadastro" method="post">
+				<form class="form-horizontal" role="form" action="?perfil=pf_add" method="post">
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Nome: *</strong><br/>
-							<input type="text" class="form-control" name="nome" placeholder="Nome completo" maxlength="70" required>
+							<input type="text" class="form-control" name="nome" placeholder="Nome completo" maxlength="120" required>
 						</div>
 					</div>
 
@@ -41,7 +74,7 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>CEP *:</strong><br/>
-							<input type="text" class="form-control" id="CEP" name="CEP" placeholder="CEP">
+							<input type="text" class="form-control" id="CEP" name="cep" placeholder="CEP">
 						</div>
 						<div class="col-md-6" align="left"><i>Clique no número do CEP e pressione a tecla Tab para carregar</i>
 						</div>
@@ -49,31 +82,31 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Endereço:</strong><br/>
-							<input type="text" readonly class="form-control" id="Endereco" name="Endereco" placeholder="Endereço">
+							<input type="text" readonly class="form-control" id="endereco" name="Endereco" placeholder="Endereço">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Número *:</strong><br/>
-							<input type="text" class="form-control" id="Numero" name="Numero" placeholder="Numero" maxlength="5" required>
+							<input type="text" class="form-control" id="Numero" name="numero" placeholder="Numero" maxlength="10" required>
 						</div>
 						<div class=" col-md-6"><strong>Complemento:</strong><br/>
-							<input type="text" class="form-control" id="Complemento" name="Complemento" placeholder="Complemento" maxlength="20">
+							<input type="text" class="form-control" id="Complemento" name="complemento" placeholder="Complemento" maxlength="120">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Bairro:</strong><br/>
-							<input type="text" readonly class="form-control" id="Bairro" name="Bairro" placeholder="Bairro">
+							<input type="text" readonly class="form-control" id="Bairro" name="bairro" placeholder="Bairro">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Cidade:</strong><br/>
-							<input type="text" readonly class="form-control" id="Cidade" name="Cidade" placeholder="Cidade">
+							<input type="text" readonly class="form-control" id="Cidade" name="cidade" placeholder="Cidade">
 						</div>
 						<div class="col-md-2"><strong>Estado:</strong><br/>
-							<input type="text" readonly class="form-control" id="Estado" name="Estado" placeholder="Estado">
+							<input type="text" readonly class="form-control" id="Estado" name="estado" placeholder="Estado">
 						</div>
 						<div class="col-md-2"><strong>Valor Ponto:</strong><br/>
 							<input type="text" class="form-control" name="ponto" maxlength="15">
@@ -82,20 +115,20 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Forma de Pagamento:</strong><br/>
-							<input type="text" class="form-control" name="drt"  maxlength="15">
+							<input type="text" class="form-control" name="forma_pagamento"  maxlength="250">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Observação:</strong><br/>
-							<textarea></textarea>
+							<textarea name="observacao" class="form-control" rows="10"></textarea>
 						</div>
 					</div>
 
 					<!-- Botão para Gravar -->
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8">
-							<input type="submit" value="GRAVAR" class="btn btn-theme btn-lg btn-block">
+							<input type="submit" value="GRAVAR" name="adicionar" class="btn btn-theme btn-lg btn-block">
 						</div>
 					</div>
 				</form>
