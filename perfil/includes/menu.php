@@ -10,16 +10,16 @@ $pasta = "?perfil=";
 				<ul class="dl-submenu">
 					<li><a href="<?php echo $pasta ?>pf_add">Cadastra PF</a></li>
 					<li><a href="<?php echo $pasta ?>pj_add">Cadastra PJ</a></li>
-					<li><a href="<?php echo $pasta ?>pf_lista">Lista PF</a></li>
-					<li><a href="<?php echo $pasta ?>pj_lista">Lista PJ</a></li>
+					<li><a href="<?php echo $pasta ?>pf_list">Lista PF</a></li>
+					<li><a href="<?php echo $pasta ?>pj_list">Lista PJ</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Condutor</a>
 				<ul class="dl-submenu">
 					<li><a href="<?php echo $pasta ?>condutor_add">Cadastra Condutor</a></li>
-					<li><a href="<?php echo $pasta ?>condutor_lista">Lista</a></li>
+					<li><a href="<?php echo $pasta ?>condutor_list">Lista</a></li>
 					<li><a href="<?php echo $pasta ?>adiantamento_add">Cadastra Adiantamento</a></li>
-					<li><a href="<?php echo $pasta ?>adiantamento_lista">Lista Adiantamento</a></li>
+					<li><a href="<?php echo $pasta ?>adiantamento_list">Lista Adiantamento</a></li>
 				</ul>
 			</li>			
 			<li><a href="#">O.S.</a>
@@ -32,8 +32,8 @@ $pasta = "?perfil=";
 			</li>
 			<li><a href="#">Relatórios</a>
 				<ul class="dl-submenu">
-					<li><a href="../pdf/excel_pf.php">Por Condutor</a></li>
-					<li><a href="../pdf/excel_pj.php">Por Cliente</a></li>
+					<li><a href="../pdf/excel_condutor.php">Por Condutor</a></li>
+					<li><a href="../pdf/excel_cliente.php">Por Cliente</a></li>
 				</ul>
 			</li>
 			<li style="color:white;">-------------------------</li>
