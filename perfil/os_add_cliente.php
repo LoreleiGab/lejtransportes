@@ -6,7 +6,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
-				<form class="form-horizontal" role="form" action="?perfil=pf_add" method="post">
+				<form class="form-horizontal" role="form" action="?perfil=os_add" method="post">
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><label>Pessoa Física: *</label><br/>
