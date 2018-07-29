@@ -32,7 +32,7 @@ $pasta = "?perfil=";
 			</li>
 			<li><a href="#">Relatórios</a>
 				<ul class="dl-submenu">
-					<li><a href="../pdf/excel_condutor.php">Por Condutor</a></li>
+					<li><a href="<?php echo $pasta ?>condutor_pesquisa">Por Condutor</a></li>
 					<li><a href="../pdf/excel_cliente.php">Por Cliente</a></li>
 				</ul>
 			</li>
