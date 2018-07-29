@@ -46,7 +46,7 @@ if(isset($_POST['edita']))
 {
 	$idOs = $_POST['id'];
 	$sql_edita = "UPDATE `os` SET `pessoa`='$tipo_cliente',`cliente`='$cliente_id',`condutor`='$condutor_id',`solicitante`='$solicitante',`valor_cliente`='$valor_cliente',`valor_condutor`='$valor_condutor',`data`='$data',`saida`='$saida',`km_servico`='$km_servico',`km_total`='$km_total',`obs`='$anotacao' WHERE id = $idOs";
-	if(mysqli_query($con,$sql_cadastra))
+	if(mysqli_query($con,$sql_edita))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Atualizado com sucesso!</strong></font>";
 	}
