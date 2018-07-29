@@ -5,21 +5,6 @@ $con = bancoMysqli();
 $tipo_cliente = $_POST['tipo_cliente'];
 $cliente_id = $_POST['cliente_id'];
 
-if($tipo_cliente == 1)
-{
-	$pf = recuperaDados("pf","id",$cliente_id);
-	$cliente = "<strong>Nome:</strong> ".$pf['nome'];
-	$endereco = "<strong>Endereço:</strong> ".$pf['endereco'].", ".$pf['numero']." ".$pf['complemento']." - <strong>Bairro:</strong> ".$pf['bairro']." - <strong>Cidade:</strong> ".$pf['cidade']." - ".$pf['estado']." <strong>CEP:</strong> ".$pf['cep'];
-	$telefones = "<strong>Telefone:</strong> ".$pf['telefone01']." | ".$pf['telefone02'];
-}
-else
-{
-	$pj = recuperaDados("pj","id",$cliente_id);
-	$cliente = "<strong>Nome Fantasia:</strong> ".$pj['nome_fantasia']. " | <strong>Razão Social:</strong> ".$pj['nome'];
-	$endereco = "<strong>Endereço:</strong> ".$pj['endereco'].", ".$pj['numero']." ".$pj['complemento']." - <strong>Bairro:</strong> ".$pj['bairro']." - <strong>Cidade:</strong> ".$pj['cidade']." - ".$pj['estado']." <strong>CEP:</strong> ".$pj['cep'];
-	$telefones = "<strong>Telefone:</strong> ".$pj['telefone01']." | ".$pj['telefone02'];
-}
-
 // gera o número da ordem de serviço
 $sql_n_os = "SELECT numero_os FROM os ORDER BY numero_os DESC LIMIT 0,1";
 $query_n_os = mysqli_query($con,$sql_n_os);
@@ -71,12 +56,12 @@ if(isset($_POST['edita']))
 	}
 }
 
-if(isset($_POST['gerar_os']))
+if(isset($_POST['novo_numero']))
 {
 	$idOs = $_POST['id'];
 	$numero_os = $_POST['numero_os'];
 	$sql_gera_os = "UPDATE `os` SET `numero_os`='$numero_os' WHERE id = '$idOs'";
-	if(mysqli_query($con,$sql_cadastra))
+	if(mysqli_query($con,$sql_gera_os))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>O.S. nº ".$numero_os." gravado com sucesso!</strong></font>";
 	}
@@ -92,7 +77,7 @@ $os = recuperaDados("os","id",$idOs);
 	<div class="container"><?php include 'includes/menu.php'; ?>
 		<p align="left"><strong><?php echo saudacao(); ?>, <?php echo $_SESSION['nome']; ?>!</strong></p>
 		<div class="form-group">
-			<h5>Cadastro de O.S. <?php echo $idOs." - ".$sql_ultimo ?></h5>
+			<h5>Edição da O.S. <?php if($os['numero_os'] > 0) echo $os['numero_os'] ?></h5>
 		</div>
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
@@ -100,11 +85,7 @@ $os = recuperaDados("os","id",$idOs);
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8" align="left"><label>INFORMAÇÕES DO CLIENTE</label><br/>
-						<?php
-							echo $cliente."<br/>";
-							echo $endereco."<br/>";
-							echo $telefones."<br/>";
-						?>
+							<?php echo recupera_cliente($tipo_cliente,$cliente_id); ?>
 						</div>
 					</div>
 
@@ -170,20 +151,36 @@ $os = recuperaDados("os","id",$idOs);
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><hr/></div>
 				</div>
-
+				
+				<!-- Gerar Número de O.S. -->
 				<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Número da O.S.: *</strong><br/>
+						<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual: *</strong><br/>
+							<input type="text" class="form-control" readonly value="<?php echo $os['numero_os'] ?>">
+						</div>
+						<div class="col-md-3"><strong>Sugestão Nº O.S.: *</strong><br/>
 							<input type="text" class="form-control" name="numero_os" maxlength="20" value="<?php echo $n_os ?>">
 						</div>
-						<div class="col-md-6"><br/>
+						<div class="col-md-2"><br/>
 							<input type="hidden" name="tipo_cliente" value="<?php echo $tipo_cliente ?>">
 							<input type="hidden" name="cliente_id" value="<?php echo $cliente_id ?>">
 							<input type="hidden" name="id" value="<?php echo $os['id'] ?>">
-							<input type="submit" value="Gerar O.S." name="gerar_os" class="btn btn-theme btn-md btn-block">
+							<input type="submit" value="Atualizar Nº" name="novo_numero" class="btn btn-theme btn-md btn-block">
 						</div>
 					</div>
 				</form>
+
+				<?php if($os['numero_os'] > 0) {?>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-8"><hr/></div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-5 col-md-2">
+							<a href='../pdf/os_pdf.php?n_os=<?php echo $os['numero_os'] ?>' target='_blank' class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;'><strong>Gerar O.S.</strong></a>
+						</div>
+					</div>
+				<?php }?>
 
 			</div>	
 		</div>

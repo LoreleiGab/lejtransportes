@@ -376,4 +376,23 @@ function validaEmail($email)
 	}
 }
 
+function recupera_cliente($tipo_cliente,$cliente_id)
+{	
+	if($tipo_cliente == 1)
+	{
+		$pf = recuperaDados("pf","id",$cliente_id);
+		$cliente = "<strong>Nome:</strong> ".$pf['nome']."<br/>".
+			"<strong>Endereço:</strong> ".$pf['endereco'].", ".$pf['numero']." ".$pf['complemento']." - <strong>Bairro:</strong> ".$pf['bairro']." - <strong>Cidade:</strong> ".$pf['cidade']." - ".$pf['estado']." <strong>CEP:</strong> ".$pf['cep']."<br/>".
+			"<strong>Telefone:</strong> ".$pf['telefone01']." | ".$pf['telefone02'];
+	}
+	else
+	{
+		$pj = recuperaDados("pj","id",$cliente_id);
+		$cliente = "<strong>Nome Fantasia:</strong> ".$pj['nome_fantasia']. " | <strong>Razão Social:</strong> ".$pj['nome']."<br/>".
+			"<strong>Endereço:</strong> ".$pj['endereco'].", ".$pj['numero']." ".$pj['complemento']." - <strong>Bairro:</strong> ".$pj['bairro']." - <strong>Cidade:</strong> ".$pj['cidade']." - ".$pj['estado']." <strong>CEP:</strong> ".$pj['cep']."<br/>".
+			"<strong>Telefone:</strong> ".$pj['telefone01']." | ".$pj['telefone02'];
+	}
+	return $cliente;
+}
+
 ?>
