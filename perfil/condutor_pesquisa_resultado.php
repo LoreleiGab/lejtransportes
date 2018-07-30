@@ -11,6 +11,7 @@ $num = mysqli_num_rows($query);
 if($num > 0)
 {
 	$i = 0;
+	$soma_s = 0;
 	while($lista = mysqli_fetch_array($query))
 	{
 		$x[$i]['id'] = $lista['id'];
@@ -27,7 +28,7 @@ if($num > 0)
 		}
 		$x[$i]['valor_condutor'] = dinheiroParaBr($lista['valor_condutor']);
 		$x[$i]['data'] = exibirDataBr($lista['data']);
-		$soma_s = $soma_s + $lista['valor_condutor'];
+		$soma_s += $lista['valor_condutor'];
 		$i++;
 	}
 	$x['num'] = $i;
@@ -44,12 +45,13 @@ $num_adiantamentos = mysqli_num_rows($query_adiantamentos);
 if($num_adiantamentos > 0)
 {
 	$i = 0;
+	$soma_a = 0;
 	while($adt = mysqli_fetch_array($query_adiantamentos))
 	{
 		$x[$i]['id'] = $adt['id'];
 		$x[$i]['valor'] = dinheiroParaBr($adt['valor']);
 		$x[$i]['data'] = exibirDataBr($adt['data']);
-		$soma_a = $soma_a + $adt['valor'];	
+		$soma_a += $adt['valor'];	
 		$i++;
 	}
 	$x['numA'] = $i;
@@ -130,6 +132,18 @@ else
 						echo "Do dia ".exibirDataBr($data_inicio)." e ".exibirDataBr($data_fim)." há um total de <strong>R$ ". dinheiroParaBr($soma_s)."</strong> em serviços e <strong>R$ ". dinheiroParaBr($soma_a)."</strong> em adiantamentos, totalizando: <strong>R$ ". dinheiroParaBr($total)."</strong>"; 
 					?>
 				</div>
+
+				<form method="POST" action="../pdf/condutor_pdf.php" class="form-horizontal" role="form">
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-8">
+							<input type="hidden" name="$condutor_id" value="<?php echo $condutor_id ?>">
+							<input type="hidden" name="data_inicio" value="<?php echo $data_inicio ?>">
+							<input type="hidden" name="data_fim" value="<?php echo $data_fim ?>">
+							<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório">
+						</div>
+					</div>
+				</form>
+
 			</div>
 		</div>
 	</div>
