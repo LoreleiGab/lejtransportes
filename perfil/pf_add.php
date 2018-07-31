@@ -49,17 +49,17 @@ if(isset($_POST['adicionar']))
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>RG: *</strong><br/>
+						<div class="col-md-offset-2 col-md-6"><strong>RG:</strong><br/>
 							<input type="text" class="form-control" name="rg" maxlength="20">
 						</div>
-						<div class="col-md-6"><strong>CPF: *</strong><br/>
-							<input type="text" class="form-control" name="cpf">
+						<div class="col-md-6"><strong>CPF:</strong><br/>
+							<input type="text" class="form-control" id="cpf" name="cpf">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Telefone #1 *:</strong><br/>
-							<input type="text" class="form-control" name="telefone1" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321">
+							<input type="text" class="form-control" name="telefone1" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" required>
 						</div>
 						<div class="col-md-6"><strong>Telefone #2:</strong><br/>
 							<input type="text" class="form-control" name="telefone2" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321">
@@ -67,13 +67,13 @@ if(isset($_POST['adicionar']))
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-8"><strong>E-mail *:</strong><br/>
+						<div class="col-md-offset-2 col-md-8"><strong>E-mail:</strong><br/>
 							<input type="text" class="form-control" name="email" placeholder="E-mail" maxlength="60" >
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>CEP *:</strong><br/>
+						<div class="col-md-offset-2 col-md-6"><strong>CEP:</strong><br/>
 							<input type="text" class="form-control" id="CEP" name="cep" placeholder="CEP">
 						</div>
 						<div class="col-md-6" align="left"><i>Clique no número do CEP e pressione a tecla Tab para carregar</i>
@@ -87,8 +87,8 @@ if(isset($_POST['adicionar']))
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Número *:</strong><br/>
-							<input type="text" class="form-control" id="Numero" name="numero" placeholder="Numero" maxlength="10" required>
+						<div class="col-md-offset-2 col-md-6"><strong>Número:</strong><br/>
+							<input type="text" class="form-control" id="Numero" name="numero" placeholder="Numero" maxlength="10">
 						</div>
 						<div class=" col-md-6"><strong>Complemento:</strong><br/>
 							<input type="text" class="form-control" id="Complemento" name="complemento" placeholder="Complemento" maxlength="120">
