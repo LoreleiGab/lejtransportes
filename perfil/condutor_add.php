@@ -92,10 +92,10 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Valor do Ponto:</strong><br/>
-							<input type="text" class="form-control" name="ponto">
+							<input type="text" class="form-control" id='valor' name="ponto">
 						</div>
 						<div class="col-md-6"><strong>Fixo:</strong><br/>
-							<input type="text" class="form-control" name="fixo">
+							<input type="text" class="form-control" id='valor' name="fixo">
 						</div>
 					</div>
 

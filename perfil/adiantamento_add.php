@@ -23,7 +23,7 @@
 							<input type="date" class="form-control" name="data" maxlength="20">
 						</div>
 						<div class="col-md-6"><strong>Valor: *</strong><br/>
-							<input type="text" class="form-control" name="valor">
+							<input type="text" class="form-control" id='valor' name="valor">
 						</div>
 					</div>
 

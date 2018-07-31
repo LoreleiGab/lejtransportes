@@ -130,10 +130,10 @@ $os = recuperaDados("os","id",$idOs);
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente: *</strong><br/>
-							<input type="text" class="form-control" name="valor_cliente" value = "<?php echo $os['valor_cliente'] ?>">
+							<input type="text" class="form-control" name="valor_cliente" id='valor' value = "<?php echo $os['valor_cliente'] ?>">
 						</div>
 						<div class="col-md-6"><strong>Valor Condutor: *</strong><br/>
-							<input type="text" class="form-control" name="valor_condutor" value = "<?php echo $os['valor_condutor'] ?>">
+							<input type="text" class="form-control" name="valor_condutor" id='valor' value = "<?php echo $os['valor_condutor'] ?>">
 						</div>
 					</div>
 

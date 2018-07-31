@@ -89,10 +89,10 @@ $n_os = $campo['numero_os'] + 1;
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente: *</strong><br/>
-							<input type="text" class="form-control" name="valor_cliente">
+							<input type="text" class="form-control" id='valor' name="valor_cliente">
 						</div>
 						<div class="col-md-6"><strong>Valor Condutor: *</strong><br/>
-							<input type="text" class="form-control" name="valor_condutor">
+							<input type="text" class="form-control" id='valor' name="valor_condutor">
 						</div>
 					</div>
 

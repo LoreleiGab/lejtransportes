@@ -109,7 +109,7 @@ if(isset($_POST['adicionar']))
 							<input type="text" readonly class="form-control" id="Estado" name="estado" placeholder="Estado">
 						</div>
 						<div class="col-md-2"><strong>Valor Ponto:</strong><br/>
-							<input type="text" class="form-control" name="ponto" maxlength="15">
+							<input type="text" class="form-control" name="ponto" id='valor' maxlength="15">
 						</div>
 					</div>
 
