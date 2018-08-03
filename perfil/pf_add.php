@@ -1,36 +1,3 @@
-<?php
-$con = bancoMysqli();
-
-if(isset($_POST['adicionar']))
-{
-	$nome = $_POST['nome'];
-	$rg = $_POST['rg'];
-	$cpf = $_POST['cpf'];
-	$telefone1 = $_POST['telefone1'];
-	$telefone2 = $_POST['telefone2'];
-	$email = $_POST['email'];
-	$endereco = $_POST['endereco'];
-	$numero = $_POST['numero'];
-	$complemento = $_POST['complemento'];
-	$bairro = $_POST['bairro'];
-	$cidade = $_POST['cidade'];
-	$estado = $_POST['estado'];
-	$cep = $_POST['cep'];
-	$ponto = $_POST['ponto'];
-	$forma_pagamento = $_POST['forma_pagamento'];
-	$observacao = $_POST['observacao'];
-
-	$sql = "INSERT INTO `pf`(`nome`, `cpf`, `rg`, `cep`, `endereco`, `bairro`, `cidade`, `estado`, `numero`, `complemento`, `telefone01`, `telefone02`, `email`, `fixo`, `forma_pagamento`, `obs`) VALUES ('$nome', '$cpf', '$rg', '$cep', '$endereco', '$bairro', '$cidade', '$estado', '$numero', '$complemento', '$telefone1', '$telefone2', '$email', '$ponto', '$forma_pagamento', '$observacao')";
-	if(mysqli_query($con,$sql))
-	{
-		$mensagem = "<font color='#01DF3A'><strong>Cadastrado com sucesso!</strong></font>";
-	}
-	else
-	{
-		$mensagem = "<font color='#FF0000'><strong>Erro ao cadastrar! Tente novamente.</strong></font>";
-	}
-}
-?>
 <section id="list_items" class="home-section bg-white">
 	<div class="container"><?php include 'includes/menu.php'; ?>
 		<p align="left"><strong><?php echo saudacao(); ?>, <?php echo $_SESSION['nome']; ?>!</strong></p>
@@ -40,7 +7,7 @@ if(isset($_POST['adicionar']))
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
 				<h5><?php if(isset($mensagem)){echo $mensagem;};?></h5>
-				<form class="form-horizontal" role="form" action="?perfil=pf_add" method="post">
+				<form class="form-horizontal" role="form" action="?perfil=pf_edit" method="post">
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Nome: *</strong><br/>
@@ -82,7 +49,7 @@ if(isset($_POST['adicionar']))
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Endereço:</strong><br/>
-							<input type="text" class="form-control" id="endereco" name="Endereco" placeholder="Endereço">
+							<input type="text" class="form-control" id="Endereco" name="endereco" placeholder="Endereço">
 						</div>
 					</div>
 
@@ -121,7 +88,7 @@ if(isset($_POST['adicionar']))
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Observação:</strong><br/>
-							<textarea name="observacao" class="form-control" rows="10"></textarea>
+							<textarea name="observacao" class="form-control" rows="6"></textarea>
 						</div>
 					</div>
 

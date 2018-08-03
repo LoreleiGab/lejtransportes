@@ -33,7 +33,7 @@
 									echo "<td class='list_description'>".$campo['telefone01']."</td>";
 									echo "<td class='list_description'>
 											<form method='POST' action='?perfil=pf_edit'>
-												<input type='hidden' name='editar' value='".$campo['id']."' />
+												<input type='hidden' name='detalhes' value='".$campo['id']."' />
 												<button class='btn btn-theme btn-sm btn-block' type ='submit' style='border-radius: 10px;'>Editar</button>
 											</form>
 										</td>";
