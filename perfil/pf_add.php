@@ -82,7 +82,7 @@ if(isset($_POST['adicionar']))
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Endereço:</strong><br/>
-							<input type="text" readonly class="form-control" id="endereco" name="Endereco" placeholder="Endereço">
+							<input type="text" class="form-control" id="endereco" name="Endereco" placeholder="Endereço">
 						</div>
 					</div>
 
@@ -97,16 +97,16 @@ if(isset($_POST['adicionar']))
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Bairro:</strong><br/>
-							<input type="text" readonly class="form-control" id="Bairro" name="bairro" placeholder="Bairro">
+							<input type="text" class="form-control" id="Bairro" name="bairro" placeholder="Bairro">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Cidade:</strong><br/>
-							<input type="text" readonly class="form-control" id="Cidade" name="cidade" placeholder="Cidade">
+							<input type="text" class="form-control" id="Cidade" name="cidade" placeholder="Cidade">
 						</div>
 						<div class="col-md-2"><strong>Estado:</strong><br/>
-							<input type="text" readonly class="form-control" id="Estado" name="estado" placeholder="Estado">
+							<input type="text" class="form-control" id="Estado" name="estado" placeholder="Estado">
 						</div>
 						<div class="col-md-2"><strong>Valor Ponto:</strong><br/>
 							<input type="text" class="form-control" name="ponto" id='valor' maxlength="15">
