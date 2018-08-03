@@ -9,13 +9,21 @@
 	$( "#hora" ).mask("99:99");
   });
  
-  $(function() {
-    $('.valor').maskMoney({thousands:'.', decimal:',', allowZero:true, suffix: ''});
+    $(function() {
+    $('#valor').maskMoney({thousands:'', decimal:',', allowZero:true, suffix: ''});
+  });
+      $(function() {
+    $('.valor').maskMoney({thousands:'', decimal:',', allowZero:true, suffix: ''});
+  });
+    $(function() {
+    $('#valor01').maskMoney({thousands:'', decimal:',', allowZero:true, suffix: ''});
+  });
+      $(function() {
+    $('#valor_individual').maskMoney({thousands:'', decimal:',', allowZero:true, suffix: ''});
   });
   $(function() {
-    $('#valor,#valor1,#valor2,#valor3,#valor01,#valor_individual,#duracao')
-      .maskMoney({thousands:'.', decimal:',', allowZero:true, suffix: ''});
-  });
+    $('#duracao').maskMoney({thousands:'', decimal:'', allowZero:true, suffix: ''});
+  })
   $(function(){
 	$("#CEP").mask("99999-999");
   });
@@ -109,8 +117,7 @@ function mtel(v){
     });        
 })
  </script>
- 
-	<script>
+ <script>
 	//funções para calendário	
 	  $(function() {
     $( "#datepicker01" ).datepicker({ 
@@ -143,33 +150,14 @@ function mtel(v){
     });
   });
   $(function() {
-    $( "#datepicker06" ).datepicker({ 
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $( "#datepicker07" ).datepicker({ 
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $( "#datepicker08" ).datepicker({ 
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $( "#datepicker09" ).datepicker({ 
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
     $( "#datepicker10" ).datepicker({ 
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+	  minDate: 0,
+      addSliderAccess: true,
+      sliderAccessArgs: {
+        touchonly: false
+      }
     });
   });
   $(function() {
@@ -292,4 +280,18 @@ function mtel(v){
 		$('.toggle5').slideToggle('slow');
 		return false;
 	});	
+  </script>
+
+<!-- Animação Progress Bar -->
+  <script type="text/javascript">
+    $(function() {
+      var current_progress = 0;
+      var interval = setInterval(function() {
+          current_progress += 10;
+          $("#dynamic")
+          .css("width", current_progress + "%").attr("aria-valuenow", current_progress);
+          if (current_progress >= 100)
+              clearInterval(interval);
+      }, 250);
+    });
   </script>
