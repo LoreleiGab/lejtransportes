@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
 				<h5><?php if(isset($mensagem)){echo $mensagem;};?></h5>
-				<form class="form-horizontal" role="form" action="?perfil=pf_add" method="post">
+				<form class="form-horizontal" role="form" action="?perfil=condutor_edit" method="post">
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Nome: *</strong><br/>
@@ -16,35 +16,35 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-3"><strong>CNH: *</strong><br/>
+						<div class="col-md-offset-2 col-md-3"><strong>CNH:</strong><br/>
 							<input type="text" class="form-control" name="cnh" maxlength="20">
 						</div>
-						<div class="col-md-2"><strong>RG: *</strong><br/>
+						<div class="col-md-2"><strong>RG:</strong><br/>
 							<input type="text" class="form-control" name="rg" maxlength="20">
 						</div>
-						<div class="col-md-3"><strong>CPF: *</strong><br/>
+						<div class="col-md-3"><strong>CPF:</strong><br/>
 							<input type="text" class="form-control" name="cpf" id="cpf">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Data de Nascimento *:</strong><br/>
-							<input type="date" class="form-control" name="data_nascimento">
+						<div class="col-md-offset-2 col-md-6"><strong>Data de Nascimento:</strong><br/>
+							<input type="text" class="form-control" id="datepicker01" name="data_nascimento">
 						</div>
-						<div class="col-md-6"><strong>CEP *:</strong><br/>
+						<div class="col-md-6"><strong>CEP:</strong><br/>
 							<input type="text" class="form-control" id="CEP" name="cep" placeholder="CEP">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Endereço:</strong><br/>
-							<input type="text" class="form-control" id="endereco" name="Endereco" placeholder="Endereço">
+							<input type="text" class="form-control" id="Endereco" name="endereco" placeholder="Endereço">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Número *:</strong><br/>
-							<input type="text" class="form-control" id="Numero" name="numero" placeholder="Numero" maxlength="10" required>
+						<div class="col-md-offset-2 col-md-6"><strong>Número:</strong><br/>
+							<input type="text" class="form-control" id="Numero" name="numero" placeholder="Numero" maxlength="10">
 						</div>
 						<div class=" col-md-6"><strong>Complemento:</strong><br/>
 							<input type="text" class="form-control" id="Complemento" name="complemento" placeholder="Complemento" maxlength="120">
@@ -67,14 +67,14 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-8"><strong>E-mail *:</strong><br/>
+						<div class="col-md-offset-2 col-md-8"><strong>E-mail:</strong><br/>
 							<input type="text" class="form-control" name="email" placeholder="E-mail" maxlength="60" >
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Telefone #1 *:</strong><br/>
-							<input type="text" class="form-control" name="telefone1" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321">
+							<input type="text" class="form-control" name="telefone1" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" required>
 						</div>
 						<div class="col-md-6"><strong>Telefone #2:</strong><br/>
 							<input type="text" class="form-control" name="telefone2" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321">
@@ -95,7 +95,7 @@
 							<input type="text" class="form-control" id='valor' name="ponto">
 						</div>
 						<div class="col-md-6"><strong>Fixo:</strong><br/>
-							<input type="text" class="form-control" id='valor' name="fixo">
+							<input type="text" class="form-control" id='valor01' name="fixo">
 						</div>
 					</div>
 
