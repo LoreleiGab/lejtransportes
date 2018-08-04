@@ -20,7 +20,7 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Data: *</strong><br/>
-							<input type="date" class="form-control" name="data" maxlength="20">
+							<input type="text" class="form-control" id="datepicker01" name="data" maxlength="20">
 						</div>
 						<div class="col-md-6"><strong>Valor: *</strong><br/>
 							<input type="text" class="form-control" id='valor' name="valor">
