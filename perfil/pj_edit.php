@@ -39,7 +39,7 @@ if(isset($_POST['adicionar']))
 if(isset($_POST['editar']))
 {
 	$idPj = $_POST['id'];
-	$sql_edita = "UPDATE `pj` SET `nome`='$nome', `nome_fantasia`='nome_fantasia',`cnpj`='$cnpj',`inscricao`='$inscricao',`cep`='$cep',`endereco`='$endereco',`bairro`='$bairro',`cidade`='$cidade',`estado`='$estado',`numero`='$numero',`complemento`='$complemento',`telefone01`='$telefone1',`telefone02`='$telefone2',`email`='$email',`ponto`='$ponto',`forma_pagamento`='$forma_pagamento',`obs`='$observacao' WHERE id = '$idPj'";
+	$sql_edita = "UPDATE `pj` SET `nome`='$nome', `nome_fantasia`='$nome_fantasia',`cnpj`='$cnpj',`inscricao`='$inscricao',`cep`='$cep',`endereco`='$endereco',`bairro`='$bairro',`cidade`='$cidade',`estado`='$estado',`numero`='$numero',`complemento`='$complemento',`telefone01`='$telefone1',`telefone02`='$telefone2',`email`='$email',`ponto`='$ponto',`forma_pagamento`='$forma_pagamento',`obs`='$observacao' WHERE id = '$idPj'";
 	if(mysqli_query($con,$sql_edita))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Editado com sucesso!</strong></font>";
