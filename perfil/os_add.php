@@ -65,34 +65,34 @@ $n_os = $campo['numero_os'] + 1;
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Data: *</strong><br/>
-							<input type="date" class="form-control" name="data" maxlength="20">
+							<input type="text" class="form-control" id="datepicker01" name="data" maxlength="20" required>
 						</div>
 						<div class="col-md-6"><strong>Saída: *</strong><br/>
-							<input type="text" class="form-control" name="saida">
+							<input type="text" class="form-control" id="hora" name="saida" required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Anotações:</strong><br/>
-							<textarea name="anotacao" class="form-control" rows="8"></textarea>
+							<textarea name="anotacao" class="form-control" rows="8" required></textarea>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Km serviço: *</strong><br/>
-							<input type="text" class="form-control" name="km_servico" maxlength="20">
+						<div class="col-md-offset-2 col-md-6"><strong>Km serviço:</strong><br/>
+							<input type="number" class="form-control" name="km_servico" maxlength="20">
 						</div>
-						<div class="col-md-6"><strong>Km total: *</strong><br/>
-							<input type="text" class="form-control" name="km_total">
+						<div class="col-md-6"><strong>Km total:</strong><br/>
+							<input type="number" class="form-control" name="km_total">
 						</div>
 					</div>					
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente: *</strong><br/>
+						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/>
 							<input type="text" class="form-control" id='valor' name="valor_cliente">
 						</div>
-						<div class="col-md-6"><strong>Valor Condutor: *</strong><br/>
-							<input type="text" class="form-control" id='valor' name="valor_condutor">
+						<div class="col-md-6"><strong>Valor Condutor:</strong><br/>
+							<input type="text" class="form-control" id='valor01' name="valor_condutor">
 						</div>
 					</div>
 
