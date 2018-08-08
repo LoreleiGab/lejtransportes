@@ -16,13 +16,13 @@ if(isset($_POST['cadastra']) || isset($_POST['edita']))
 {
 	$solicitante = $_POST['solicitante'];
 	$condutor_id = $_POST['condutor_id'];
-	$data = $_POST['data'];
+	$data = exibirDataMysql($_POST['data']);
 	$saida = $_POST['saida'];
 	$anotacao = $_POST['anotacao'];
 	$km_servico = $_POST['km_servico'];
 	$km_total = $_POST['km_total'];
-	$valor_cliente = $_POST['valor_cliente'];
-	$valor_condutor = $_POST['valor_condutor'];
+	$valor_cliente = dinheiroDeBr($_POST['valor_cliente']);
+	$valor_condutor = dinheiroDeBr($_POST['valor_condutor']);
 }
 
 if(isset($_POST['cadastra']))
@@ -71,6 +71,11 @@ if(isset($_POST['novo_numero']))
 	}
 }
 
+if(isset($_POST['detalhes']))
+{
+	$idOs = $_POST['detalhes'];
+}
+
 $os = recuperaDados("os","id",$idOs);
 ?>
 <section id="list_items" class="home-section bg-white">
@@ -106,34 +111,34 @@ $os = recuperaDados("os","id",$idOs);
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Data: *</strong><br/>
-							<input type="date" class="form-control" name="data" maxlength="20" value = "<?php echo $os['data'] ?>">
+							<input type="text" class="form-control" id="datepicker01" name="data" maxlength="20" value = "<?php echo exibirDataBr($os['data']) ?>" required>
 						</div>
 						<div class="col-md-6"><strong>Saída: *</strong><br/>
-							<input type="text" class="form-control" name="saida" value = "<?php echo $os['saida'] ?>">
+							<input type="text" class="form-control" id="hora" name="saida" value = "<?php echo $os['saida'] ?>" required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Anotações:</strong><br/>
-							<textarea name="anotacao" class="form-control" rows="8"><?php echo $os['obs'] ?></textarea>
+							<textarea name="anotacao" class="form-control" rows="8" required><?php echo $os['obs'] ?></textarea>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Km serviço: *</strong><br/>
-							<input type="text" class="form-control" name="km_servico" maxlength="20" value = "<?php echo $os['km_servico'] ?>">
+						<div class="col-md-offset-2 col-md-6"><strong>Km serviço:</strong><br/>
+							<input type="text" class="form-control" id="valor2" name="km_servico" maxlength="20" value = "<?php echo $os['km_servico'] ?>">
 						</div>
-						<div class="col-md-6"><strong>Km total: *</strong><br/>
-							<input type="text" class="form-control" name="km_total" value = "<?php echo $os['km_total'] ?>">
+						<div class="col-md-6"><strong>Km total:</strong><br/>
+							<input type="text" class="form-control" id="valor3" name="km_total" value = "<?php echo $os['km_total'] ?>">
 						</div>
 					</div>					
 
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente: *</strong><br/>
-							<input type="text" class="form-control" name="valor_cliente" id='valor' value = "<?php echo $os['valor_cliente'] ?>">
+						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/>
+							<input type="text" class="form-control" name="valor_cliente" id='valor' value = "<?php echo dinheiroParaBr($os['valor_cliente']) ?>">
 						</div>
-						<div class="col-md-6"><strong>Valor Condutor: *</strong><br/>
-							<input type="text" class="form-control" name="valor_condutor" id='valor' value = "<?php echo $os['valor_condutor'] ?>">
+						<div class="col-md-6"><strong>Valor Condutor:</strong><br/>
+							<input type="text" class="form-control" name="valor_condutor" id='valor01' value = "<?php echo dinheiroParaBr($os['valor_condutor']) ?>">
 						</div>
 					</div>
 
@@ -155,10 +160,10 @@ $os = recuperaDados("os","id",$idOs);
 				<!-- Gerar Número de O.S. -->
 				<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual: *</strong><br/>
+						<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual:</strong><br/>
 							<input type="text" class="form-control" readonly value="<?php echo $os['numero_os'] ?>">
 						</div>
-						<div class="col-md-3"><strong>Sugestão Nº O.S.: *</strong><br/>
+						<div class="col-md-3"><strong>Sugestão Nº O.S.:</strong><br/>
 							<input type="text" class="form-control" name="numero_os" maxlength="20" value="<?php echo $n_os ?>">
 						</div>
 						<div class="col-md-2"><br/>
@@ -186,3 +191,7 @@ $os = recuperaDados("os","id",$idOs);
 		</div>
 	</div>
 </section>
+<!--
+	API cálculo de rota 
+	https://www.princiweb.com.br/blog/programacao/google-apis/google-maps-api-v3-criando-rotas-entre-multiplos-pontos.html
+-->
