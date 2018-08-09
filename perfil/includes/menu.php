@@ -21,14 +21,11 @@ $pasta = "?perfil=";
 					<li><a href="<?php echo $pasta ?>adiantamento_add">Cadastra Adiantamento</a></li>
 					<li><a href="<?php echo $pasta ?>adiantamento_list">Lista Adiantamento</a></li>
 				</ul>
-			</li>			
+			</li>
 			<li><a href="#">O.S.</a>
 				<ul class="dl-submenu">
-					<li><a href="<?php echo $pasta ?>os_add_cliente">Cadastra O.S.</a></li>
+					<li><a href="<?php echo $pasta ?>os_add_cliente">Cadastra</a></li>
 					<li><a href="<?php echo $pasta ?>os_pesquisa">Pesquisa</a></li>
-					<li><a href="<?php echo $pasta ?>os_aberta">O.S. Abertas</a></li>
-					<li><a href="<?php echo $pasta ?>os_fechada">O.S. Fechadas</a></li>
-					<li><a href="<?php echo $pasta ?>os_cancelada">O.S. Canceladas</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Relatórios</a>

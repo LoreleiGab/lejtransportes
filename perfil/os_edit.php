@@ -86,6 +86,7 @@ $os = recuperaDados("os","id",$idOs);
 		</div>
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
+				<h5><?php if(isset($mensagem)){echo $mensagem;};?></h5>
 				<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
 
 					<div class="form-group">
@@ -131,7 +132,7 @@ $os = recuperaDados("os","id",$idOs);
 						<div class="col-md-6"><strong>Km total:</strong><br/>
 							<input type="text" class="form-control" id="valor3" name="km_total" value = "<?php echo $os['km_total'] ?>">
 						</div>
-					</div>					
+					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/>
@@ -156,25 +157,28 @@ $os = recuperaDados("os","id",$idOs);
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><hr/></div>
 				</div>
-				
-				<!-- Gerar Número de O.S. -->
-				<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
-					<div class="form-group">
-						<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual:</strong><br/>
-							<input type="text" class="form-control" readonly value="<?php echo $os['numero_os'] ?>">
-						</div>
-						<div class="col-md-3"><strong>Sugestão Nº O.S.:</strong><br/>
-							<input type="text" class="form-control" name="numero_os" maxlength="20" value="<?php echo $n_os ?>">
-						</div>
-						<div class="col-md-2"><br/>
-							<input type="hidden" name="tipo_cliente" value="<?php echo $tipo_cliente ?>">
-							<input type="hidden" name="cliente_id" value="<?php echo $cliente_id ?>">
-							<input type="hidden" name="id" value="<?php echo $os['id'] ?>">
-							<input type="submit" value="Atualizar Nº" name="novo_numero" class="btn btn-theme btn-md btn-block">
-						</div>
-					</div>
-				</form>
 
+				<!-- Gerar Número de O.S. -->
+				<?php if($os['numero_os'] == 0) {?>
+					<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual:</strong><br/>
+								<input type="text" class="form-control" readonly value="<?php echo $os['numero_os'] ?>">
+							</div>
+							<div class="col-md-3"><strong>Sugestão Nº O.S.:</strong><br/>
+								<input type="text" class="form-control" name="numero_os" maxlength="20" value="<?php echo $n_os ?>">
+							</div>
+							<div class="col-md-2"><br/>
+								<input type="hidden" name="tipo_cliente" value="<?php echo $tipo_cliente ?>">
+								<input type="hidden" name="cliente_id" value="<?php echo $cliente_id ?>">
+								<input type="hidden" name="id" value="<?php echo $os['id'] ?>">
+								<input type="submit" value="Atualizar Nº" name="novo_numero" class="btn btn-theme btn-md btn-block">
+							</div>
+						</div>
+					</form>
+				<?php }?>
+
+				<!-- Gerar O.S. em PDF -->
 				<?php if($os['numero_os'] > 0) {?>
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><hr/></div>
@@ -187,11 +191,11 @@ $os = recuperaDados("os","id",$idOs);
 					</div>
 				<?php }?>
 
-			</div>	
+			</div>
 		</div>
 	</div>
 </section>
 <!--
-	API cálculo de rota 
+	API cálculo de rota
 	https://www.princiweb.com.br/blog/programacao/google-apis/google-maps-api-v3-criando-rotas-entre-multiplos-pontos.html
 -->
