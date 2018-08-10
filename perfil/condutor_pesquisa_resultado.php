@@ -24,7 +24,7 @@ if($num > 0)
 		else
 		{
 			$pj = recuperaDados("pj","id",$lista['cliente']);
-			$x[$i]['cliente'] = $pf['nome_fantasia'];
+			$x[$i]['cliente'] = $pj['nome'];
 		}
 		$x[$i]['valor_condutor'] = dinheiroParaBr($lista['valor_condutor']);
 		$x[$i]['data'] = exibirDataBr($lista['data']);
