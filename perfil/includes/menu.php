@@ -5,7 +5,7 @@ $pasta = "?perfil=";
 	<div id="dl-menu" class="dl-menuwrapper">
 		<button class="dl-trigger">Open Menu</button>
 		<ul class="dl-menu">
-			<li><a href="<?php echo $pasta ?>smc_index">Home</a></li>
+			<li><a href="<?php echo $pasta ?>index">Home</a></li>
 			<li><a href="#">Clientes</a>
 				<ul class="dl-submenu">
 					<li><a href="<?php echo $pasta ?>pf_add">Cadastra PF</a></li>
