@@ -412,7 +412,7 @@ function recupera_cliente($tipo_cliente,$cliente_id)
 }
 
 
-function condutor($condutor_id,$data_inicio,$data_fim)
+function servicosCondutor($condutor_id,$data_inicio,$data_fim)
 {
 	$con = bancoMysqli();
 	$sql = "SELECT * FROM `os` WHERE `condutor` = '$condutor_id' AND `data` BETWEEN '$data_inicio' AND '$data_fim' AND `publicado` = 1";
@@ -441,6 +441,27 @@ function condutor($condutor_id,$data_inicio,$data_fim)
 		$i++;
 	}
 	$y['soma_s'] = "R$ ".dinheiroParaBr($soma_s);
+	$y['numero'] = $i;
+	return $y;
+}
+
+function adiantamentoCondutor($condutor_id,$data_inicio,$data_fim)
+{
+	$con = bancoMysqli();
+	$sql = "SELECT * FROM `adiantamentos` WHERE funcionario = '$condutor_id' AND `data` BETWEEN '$data_inicio' AND '$data_fim'";
+	$query = mysqli_query($con,$sql);
+	$y = array();
+	$i = 0;
+	$soma_a = 0;
+	while($x = mysqli_fetch_array($query))
+	{
+		$y[$i]['id'] = $x['id'];
+		$y[$i]['valor'] = dinheiroParaBr($x['valor']);
+		$y[$i]['data'] = exibirDataBr($x['data']);
+		$soma_a += $x['valor'];
+		$i++;
+	}
+	$y['soma_a'] = "R$ ".dinheiroParaBr($soma_a);
 	$y['numero'] = $i;
 	return $y;
 }
