@@ -136,7 +136,7 @@ else
 				<form method="POST" action="../pdf/condutor_pdf.php" class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8">
-							<input type="hidden" name="$condutor_id" value="<?php echo $condutor_id ?>">
+							<input type="hidden" name="condutor_id" value="<?php echo $condutor_id ?>">
 							<input type="hidden" name="data_inicio" value="<?php echo $data_inicio ?>">
 							<input type="hidden" name="data_fim" value="<?php echo $data_fim ?>">
 							<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório">

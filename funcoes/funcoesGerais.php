@@ -296,7 +296,7 @@ function retornaMes($mes)
 	}
 }
 
-function retornaMesExtenso($data)
+function retornaMesExtenso($dataMysql)
 {
 	$meses = array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro');
 	$data = explode("-", $dataMysql);
@@ -411,4 +411,37 @@ function recupera_cliente($tipo_cliente,$cliente_id)
 	return $cliente;
 }
 
+
+function condutor($condutor_id,$data_inicio,$data_fim)
+{
+	$con = bancoMysqli();
+	$sql = "SELECT * FROM `os` WHERE `condutor` = '$condutor_id' AND `data` BETWEEN '$data_inicio' AND '$data_fim' AND `publicado` = 1";
+	$query = mysqli_query($con,$sql);
+	$y = array();
+	$i = 0;
+	$texto = "";
+	$soma_s = 0;
+	while($x = mysqli_fetch_array($query))
+	{
+		$y[$i]['id'] = $x['id'];
+		$y[$i]['numero_os'] = $x['numero_os'];
+		if($x['numero_os'] == 1)
+		{
+			$pf = recuperaDados("pf","id",$x['cliente']);
+			$y[$i]['cliente'] = $pf['nome'];
+		}
+		else
+		{
+			$pj = recuperaDados("pj","id",$x['cliente']);
+			$y[$i]['cliente'] = $pj['nome'];
+		}
+		$y[$i]['valor_condutor'] = dinheiroParaBr($x['valor_condutor']);
+		$y[$i]['data'] = exibirDataBr($x['data']);
+		$soma_s += $x['valor_condutor'];
+		$i++;
+	}
+	$y['soma_s'] = "R$ ".dinheiroParaBr($soma_s);
+	$y['numero'] = $i;
+	return $y;
+}
 ?>
