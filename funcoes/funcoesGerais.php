@@ -465,4 +465,38 @@ function adiantamentoCondutor($condutor_id,$data_inicio,$data_fim)
 	$y['numero'] = $i;
 	return $y;
 }
+
+function servicosCliente($tipo_pessoa,$cliente_id,$data_inicio,$data_fim)
+{
+    $con = bancoMysqli();
+    $sql = "SELECT * FROM `os` WHERE pessoa = '$tipo_pessoa' AND `cliente` = '$cliente_id' AND `data` BETWEEN '$data_inicio' AND '$data_fim' AND `publicado` = 1";
+    $query = mysqli_query($con,$sql);
+    $y = array();
+    $i = 0;
+    $soma_s = 0;
+    while($lista = mysqli_fetch_array($query))
+    {
+        $condutor = recuperaDados("funcionarios","id",$lista['condutor']);
+        $x[$i]['id'] = $lista['id'];
+        $x[$i]['numero_os'] = $lista['numero_os'];
+        $x[$i]['nome_condutor'] = $condutor['nome'];
+        if($lista['pessoa'] == 1)
+        {
+            $pf = recuperaDados("pf","id",$lista['cliente']);
+            $x[$i]['cliente'] = $pf['nome'];
+        }
+        else
+        {
+            $pj = recuperaDados("pj","id",$lista['cliente']);
+            $x[$i]['cliente'] = $pj['nome'];
+        }
+        $x[$i]['valor_cliente'] = dinheiroParaBr($lista['valor_cliente']);
+        $x[$i]['data'] = exibirDataBr($lista['data']);
+        $soma_s += $lista['valor_cliente'];
+        $i++;
+    }
+    $x['soma_s'] = "R$ ".dinheiroParaBr($soma_s);
+    $x['numero'] = $i;
+    return $x;
+}
 ?>

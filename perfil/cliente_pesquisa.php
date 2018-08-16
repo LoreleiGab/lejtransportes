@@ -5,15 +5,24 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
-				<form method="POST" action="?perfil=condutor_pesquisa_resultado" class="form-horizontal" role="form">
+				<form method="POST" action="?perfil=cliente_pesquisa_resultado" class="form-horizontal" role="form">
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-8"><label>Condutor: *</label><br/>
-							<select class="form-control" name="condutor_id" required>
+						<div class="col-md-offset-2 col-md-8"><label>Pessoa Física:</label><br/>
+							<select class="form-control" name="pf_id" required>
 								<option value="0">Selecione...</option>
-								<?php echo geraOpcao("funcionarios",$os['condutor']) ?>
+								<?php echo geraOpcao("pf","") ?>
 							</select>
 						</div>
 					</div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8"><label>Pessoa Jurídica:</label><br/>
+                            <select class="form-control" name="pj_id" required>
+                                <option value="0">Selecione...</option>
+                                <?php echo geraOpcao("pj","") ?>
+                            </select>
+                        </div>
+                    </div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><label>De</label>
