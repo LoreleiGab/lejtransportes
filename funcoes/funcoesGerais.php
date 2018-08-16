@@ -425,7 +425,7 @@ function servicosCondutor($condutor_id,$data_inicio,$data_fim)
 	{
 		$y[$i]['id'] = $x['id'];
 		$y[$i]['numero_os'] = $x['numero_os'];
-		if($x['numero_os'] == 1)
+		if($x['tipo_pessoa'] == 1)
 		{
 			$pf = recuperaDados("pf","id",$x['cliente']);
 			$y[$i]['cliente'] = $pf['nome'];
