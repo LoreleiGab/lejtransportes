@@ -133,7 +133,7 @@ else
 					?>
 				</div>
 
-				<form method="POST" action="../pdf/condutor_pdf.php" class="form-horizontal" role="form">
+				<form method="POST" target="_blank" action="../pdf/condutor_pdf.php" class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8">
 							<input type="hidden" name="condutor_id" value="<?php echo $condutor_id ?>">

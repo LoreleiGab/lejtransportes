@@ -419,30 +419,29 @@ function servicosCondutor($condutor_id,$data_inicio,$data_fim)
 	$query = mysqli_query($con,$sql);
 	$y = array();
 	$i = 0;
-	$texto = "";
 	$soma_s = 0;
-	while($x = mysqli_fetch_array($query))
-	{
-		$y[$i]['id'] = $x['id'];
-		$y[$i]['numero_os'] = $x['numero_os'];
-		if($x['tipo_pessoa'] == 1)
-		{
-			$pf = recuperaDados("pf","id",$x['cliente']);
-			$y[$i]['cliente'] = $pf['nome'];
-		}
-		else
-		{
-			$pj = recuperaDados("pj","id",$x['cliente']);
-			$y[$i]['cliente'] = $pj['nome'];
-		}
-		$y[$i]['valor_condutor'] = dinheiroParaBr($x['valor_condutor']);
-		$y[$i]['data'] = exibirDataBr($x['data']);
-		$soma_s += $x['valor_condutor'];
-		$i++;
-	}
-	$y['soma_s'] = "R$ ".dinheiroParaBr($soma_s);
-	$y['numero'] = $i;
-	return $y;
+    while($lista = mysqli_fetch_array($query))
+    {
+        $x[$i]['id'] = $lista['id'];
+        $x[$i]['numero_os'] = $lista['numero_os'];
+        if($lista['pessoa'] == 1)
+        {
+            $pf = recuperaDados("pf","id",$lista['cliente']);
+            $x[$i]['cliente'] = $pf['nome'];
+        }
+        else
+        {
+            $pj = recuperaDados("pj","id",$lista['cliente']);
+            $x[$i]['cliente'] = $pj['nome'];
+        }
+        $x[$i]['valor_condutor'] = dinheiroParaBr($lista['valor_condutor']);
+        $x[$i]['data'] = exibirDataBr($lista['data']);
+        $soma_s += $lista['valor_condutor'];
+        $i++;
+    }
+	$x['soma_s'] = "R$ ".dinheiroParaBr($soma_s);
+	$x['numero'] = $i;
+	return $x;
 }
 
 function adiantamentoCondutor($condutor_id,$data_inicio,$data_fim)
