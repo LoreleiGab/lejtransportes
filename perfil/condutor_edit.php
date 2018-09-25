@@ -53,9 +53,77 @@ if(isset($_POST['editar']))
 	}
 }
 
+if(isset($_POST["enviar"]))
+{
+    $sql_arquivos = "SELECT * FROM lista_documentos WHERE tipo_documento_id = '2'";
+    $query_arquivos = mysqli_query($con,$sql_arquivos);
+    while($arq = mysqli_fetch_array($query_arquivos))
+    {
+        $y = $arq['id'];
+        $x = $arq['sigla'];
+        $nome_arquivo = isset($_FILES['arquivo']['name'][$x]) ? $_FILES['arquivo']['name'][$x] : null;
+        $f_size = isset($_FILES['arquivo']['size'][$x]) ? $_FILES['arquivo']['size'][$x] : null;
+
+        //Extensões permitidas
+        $ext = array("PDF","pdf");
+
+        if($f_size > 5242880) // 5MB em bytes
+        {
+            $mensagem = "<font color='#FF0000'><strong>Erro! Tamanho de arquivo excedido! Tamanho máximo permitido: 05 MB.</strong></font>";
+        }
+        else
+        {
+            if($nome_arquivo != "")
+            {
+                $nome_temporario = $_FILES['arquivo']['tmp_name'][$x];
+                $new_name = date("YmdHis")."_".semAcento($nome_arquivo); //Definindo um novo nome para o arquivo
+                $hoje = date("Y-m-d H:i:s");
+                $dir = '../uploadsdocs/'; //Diretório para uploads
+                $allowedExts = array(".pdf", ".PDF"); //Extensões permitidas
+                $ext = strtolower(substr($nome_arquivo,-4));
+
+                if(in_array($ext, $allowedExts)) //Pergunta se a extensão do arquivo, está presente no array das extensões permitidas
+                {
+                    if(move_uploaded_file($nome_temporario, $dir.$new_name))
+                    {
+                        $sql_insere_arquivo = "INSERT INTO `upload_arquivo` (`idTipo`, `idPessoa`, `idListaDocumento`, `arquivo`, `dataEnvio`, `publicado`) VALUES ('$tipoPessoa', '$idProjeto', '$y', '$new_name', '$hoje', '1'); ";
+                        $query = mysqli_query($con,$sql_insere_arquivo);
+                        if($query)
+                        {
+                            $idUploadArquivo = recuperaUltimo('upload_arquivo');
+                            $sql_insere_data = "INSERT INTO disponibilizar_documento (idUploadArquivo) VALUES ($idUploadArquivo)";
+                            $query_insere_data = mysqli_query($con,$sql_insere_data);
+                            echo $sql_insere_data;
+                            $mensagem = "<font color='#01DF3A'><strong>Arquivo recebido com sucesso!</strong></font>";
+                            gravarLog($sql_insere_arquivo);
+                        }
+                        else
+                        {
+                            $mensagem = "<font color='#FF0000'><strong>Erro ao gravar no banco.</strong></font>";
+                        }
+                    }
+                    else
+                    {
+                        $mensagem = "<font color='#FF0000'><strong>Erro no upload! Tente novamente.</strong></font>";
+                    }
+                }
+                else
+                {
+                    $mensagem = "<font color='#FF0000'><strong>Erro no upload! Anexar documentos somente no formato PDF.</strong></font>";
+                }
+            }
+        }
+    }
+}
+
 if(isset($_POST['detalhes']))
 {
-	$idCondutor = $_POST['detalhes'];
+    $idCondutor = $_POST['detalhes'];
+}
+
+if(isset($_POST['id']))
+{
+    $idCondutor = $_POST['id'];
 }
 
 $condutor = recuperaDados("funcionarios","id",$idCondutor);
@@ -175,6 +243,18 @@ $condutor = recuperaDados("funcionarios","id",$idCondutor);
 						</div>
 					</div>
 				</form>
+
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-10"><hr/></div>
+                </div>
+
+                <!-- Upload do Arquivo -->
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <?php uploadArquivo($condutor['id'], "condutor_edit", 2, 2); ?>
+                    </div>
+                </div>
+                <!-- Fim Upload do Arquivo -->
 			</div>				
 		</div>
 	</div>

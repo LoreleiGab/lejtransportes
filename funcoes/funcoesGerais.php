@@ -498,4 +498,116 @@ function servicosCliente($tipo_pessoa,$cliente_id,$data_inicio,$data_fim)
     $x['numero'] = $i;
     return $x;
 }
-?>
+
+function arquivosExiste($urlArquivo, $extensao = '.php')
+{
+    $file = $urlArquivo.$extensao;
+    $file_headers = @get_headers($file);
+    if($file_headers[0] == 'HTTP/1.1 404 Not Found'):
+        return false;
+    endif;
+
+    return true;
+}
+
+function selecionaArquivoAnexo($http, $idListaDocumento, $extensao = '.php')
+{
+    $path = $http.$idListaDocumento.$extensao;
+    return $path;
+}
+
+function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
+{
+    $server = "http://".$_SERVER['SERVER_NAME']."/lejtransportes";
+    $http = $server."/pdf/";
+    $con = bancoMysqli();
+    /*
+     * Início da listagem de arquivo
+     */
+    $sql = "SELECT * FROM lista_documentos as list
+			INNER JOIN upload_arquivo as arq ON arq.idListaDocumento = list.id
+			WHERE arq.idOrigem = '$idOrigem'
+			AND arq.publicado = '1' AND list.id = '$idListaDocumento'";
+    $query = mysqli_query($con,$sql);
+    $linhas = mysqli_num_rows($query);
+    echo '<div class="table-responsive list_info">
+				<h6>Arquivos Anexado</h6>';
+    if ($linhas > 0)
+    {
+        echo "
+		<table class='table table-condensed'>
+			<thead>
+				<tr class='list_menu'>
+					<td>Tipo de arquivo</td>
+					<td>Nome do arquivo</td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>";
+        while($arquivo = mysqli_fetch_array($query))
+        {
+            echo "<tr>";
+            echo "<td class='list_description'>".$arquivo['documento']."</td>";
+            echo "<td class='list_description'><a href='../uploadsdocs/".$arquivo['arquivo']."' target='_blank'>". mb_strimwidth($arquivo['arquivo'], 15 ,25,"..." )."</a></td>";
+            $dateNow = date('Y-m-d');
+            $dataenvio = date_format(date_create($arquivo['dataEnvio']), 'Y-m-d');
+            if($dataenvio == $dateNow) {
+                echo "
+						<td class='list_description'>
+							<form id='apagarArq' method='POST' action='?perfil=" . $pagina . "'>
+								<input type='hidden' name='idPessoa' value='" . $idOrigem . "' />
+								<input type='hidden' name='apagar' value='" . $arquivo['idUploadArquivo'] . "' />
+								<input type='submit' class='btn btn-theme btn-md btn-block'  value='apagar' />
+							</form>
+						</td>";
+            }
+            echo "</tr>";
+        }
+        echo "
+		</tbody>
+		</table>";
+    }
+    else
+    {
+        echo "<p>Não há arquivo(s) inserido(s).</p><br/>";
+    }
+    echo "</div>";
+    /*
+     * Início da área de upload
+     */
+    echo '<div class="table-responsive list_info"><h6>Upload de Arquivos (somente em PDF)</h6>';
+    $sql_arquivos = "SELECT * FROM lista_documentos WHERE tipo_documento_id = '$idTipoUpload' AND id = '$idListaDocumento'";
+    $query_arquivos = mysqli_query($con,$sql_arquivos);
+    while($arq = mysqli_fetch_array($query_arquivos))
+    {
+        echo "<tr>";
+        $doc = $arq['documento'];
+        $query = "SELECT id FROM lista_documentos WHERE documento='$doc' AND publicado='1' AND tipo_documento_id='$idTipoUpload'";
+        $envio = $con->query($query);
+
+        echo '<form method="POST" action="?perfil=' . $pagina . '" enctype="multipart/form-data">
+		<table class="table table-condensed">
+			<tr class="list_menu">
+				<td>Tipo de Arquivo</td>
+				<td></td>
+			</tr>';
+        $urlArquivo = $http . $arq['id'];
+        if (arquivosExiste($urlArquivo)) {
+            echo '<td class="list_description path">';
+            $path = selecionaArquivoAnexo($http, $arq['id']);
+            echo "<a href='" . $path . "'target='_blank'>" . $arq['documento'] . "</a>
+				</td>";
+        } else {
+            echo "<td class='list_description path'>" . $arq['documento'] . "</td>";
+        }
+        echo "<td class='list_description'><input type='file' name='arquivo[" . $arq['sigla'] . "]'></td>";
+        echo "</tr>";
+        echo "</table><br>";
+        echo "<input type='hidden' name='id' value='" . $idOrigem . "' />";
+        echo "<input type='hidden' name='idTipoUpload' value='" . $idTipoUpload . "' />";
+        echo '<input type="submit" name="enviar" class="btn btn-theme btn-lg btn-block" value="Enviar">
+		</form>	';
+    }
+    echo '</div>';
+    /* Fim Upload de arquivo */
+}
