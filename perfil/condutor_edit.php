@@ -53,13 +53,32 @@ if(isset($_POST['editar']))
 	}
 }
 
-if(isset($_POST["enviar"]))
+if(isset($_POST['idPessoa'])){
+    $idCondutor = $_POST['idPessoa'];
+    $tipoPessoa = 2;
+}
+
+if(isset($_POST['apagar']))
 {
-    $sql_arquivos = "SELECT * FROM lista_documentos WHERE tipo_documento_id = '2'";
+    $idArquivo = $_POST['apagar'];
+    $sql_apagar_arquivo = "UPDATE upload_arquivo SET publicado = 0 WHERE idUploadArquivo = '$idArquivo'";
+    if(mysqli_query($con,$sql_apagar_arquivo))
+    {
+        $mensagem = "<font color='#01DF3A'><strong>Arquivo apagado com sucesso!</strong></font>";
+    }
+    else
+    {
+        $mensagem = "<font color='#FF0000'><strong>Erro ao apagar arquivo!</strong></font>";
+    }
+}
+
+if(isset($_POST['enviar']))
+{
+    $sql_arquivos = "SELECT * FROM lista_documento WHERE idTipoUpload = '$tipoPessoa'";
     $query_arquivos = mysqli_query($con,$sql_arquivos);
     while($arq = mysqli_fetch_array($query_arquivos))
     {
-        $y = $arq['id'];
+        $y = $arq['idListaDocumento'];
         $x = $arq['sigla'];
         $nome_arquivo = isset($_FILES['arquivo']['name'][$x]) ? $_FILES['arquivo']['name'][$x] : null;
         $f_size = isset($_FILES['arquivo']['size'][$x]) ? $_FILES['arquivo']['size'][$x] : null;
@@ -86,16 +105,11 @@ if(isset($_POST["enviar"]))
                 {
                     if(move_uploaded_file($nome_temporario, $dir.$new_name))
                     {
-                        $sql_insere_arquivo = "INSERT INTO `upload_arquivo` (`idTipo`, `idPessoa`, `idListaDocumento`, `arquivo`, `dataEnvio`, `publicado`) VALUES ('$tipoPessoa', '$idProjeto', '$y', '$new_name', '$hoje', '1'); ";
+                        $sql_insere_arquivo = "INSERT INTO `upload_arquivo` (`idTipo`, `idPessoa`, `idListaDocumento`, `arquivo`, `dataEnvio`, `publicado`) VALUES ('$tipoPessoa', '$idCondutor', '$y', '$new_name', '$hoje', '1'); ";
                         $query = mysqli_query($con,$sql_insere_arquivo);
                         if($query)
                         {
-                            $idUploadArquivo = recuperaUltimo('upload_arquivo');
-                            $sql_insere_data = "INSERT INTO disponibilizar_documento (idUploadArquivo) VALUES ($idUploadArquivo)";
-                            $query_insere_data = mysqli_query($con,$sql_insere_data);
-                            echo $sql_insere_data;
                             $mensagem = "<font color='#01DF3A'><strong>Arquivo recebido com sucesso!</strong></font>";
-                            gravarLog($sql_insere_arquivo);
                         }
                         else
                         {
@@ -251,7 +265,7 @@ $condutor = recuperaDados("funcionarios","id",$idCondutor);
                 <!-- Upload do Arquivo -->
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
-                        <?php uploadArquivo($condutor['id'], "condutor_edit", 2, 2); ?>
+                        <?php uploadArquivo($idCondutor, 2,"condutor_edit", 2, 2); ?>
                     </div>
                 </div>
                 <!-- Fim Upload do Arquivo -->

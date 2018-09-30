@@ -516,22 +516,24 @@ function selecionaArquivoAnexo($http, $idListaDocumento, $extensao = '.php')
     return $path;
 }
 
-function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
+function uploadArquivo($idProjeto, $tipoPessoa, $pagina, $idListaDocumento, $idTipoUpload)
 {
-    $server = "http://".$_SERVER['SERVER_NAME']."/lejtransportes";
+    $server = "http://".$_SERVER['SERVER_NAME']."/promac";
     $http = $server."/pdf/";
     $con = bancoMysqli();
     /*
      * Início da listagem de arquivo
      */
-    $sql = "SELECT * FROM lista_documentos as list
-			INNER JOIN upload_arquivo as arq ON arq.idListaDocumento = list.id
-			WHERE arq.idOrigem = '$idOrigem'
-			AND arq.publicado = '1' AND list.id = '$idListaDocumento'";
+    $sql = "SELECT *
+			FROM lista_documento as list
+			INNER JOIN upload_arquivo as arq ON arq.idListaDocumento = list.idListaDocumento
+			WHERE arq.idPessoa = '$idProjeto'
+			AND arq.idTipo = '$tipoPessoa'
+			AND arq.publicado = '1' AND list.idListaDocumento = '$idListaDocumento'";
     $query = mysqli_query($con,$sql);
     $linhas = mysqli_num_rows($query);
     echo '<div class="table-responsive list_info">
-				<h6>Arquivos Anexado</h6>';
+				<h6>Arquivo Anexado</h6>';
     if ($linhas > 0)
     {
         echo "
@@ -547,7 +549,7 @@ function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
         while($arquivo = mysqli_fetch_array($query))
         {
             echo "<tr>";
-            echo "<td class='list_description'>".$arquivo['documento']."</td>";
+            echo "<td class='list_description'>(".$arquivo['documento'].")</td>";
             echo "<td class='list_description'><a href='../uploadsdocs/".$arquivo['arquivo']."' target='_blank'>". mb_strimwidth($arquivo['arquivo'], 15 ,25,"..." )."</a></td>";
             $dateNow = date('Y-m-d');
             $dataenvio = date_format(date_create($arquivo['dataEnvio']), 'Y-m-d');
@@ -555,7 +557,8 @@ function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
                 echo "
 						<td class='list_description'>
 							<form id='apagarArq' method='POST' action='?perfil=" . $pagina . "'>
-								<input type='hidden' name='idPessoa' value='" . $idOrigem . "' />
+								<input type='hidden' name='idPessoa' value='" . $idProjeto . "' />
+								<input type='hidden' name='tipoPessoa' value='" . $tipoPessoa . "' />
 								<input type='hidden' name='apagar' value='" . $arquivo['idUploadArquivo'] . "' />
 								<input type='submit' class='btn btn-theme btn-md btn-block'  value='apagar' />
 							</form>
@@ -575,15 +578,16 @@ function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
     /*
      * Início da área de upload
      */
-    echo '<div class="table-responsive list_info"><h6>Upload de Arquivos (somente em PDF)</h6>';
-    $sql_arquivos = "SELECT * FROM lista_documentos WHERE tipo_documento_id = '$idTipoUpload' AND id = '$idListaDocumento'";
+    echo '<div class="table-responsive list_info"><h6>Upload de Arquivo (somente em PDF)</h6>';
+    $sql_arquivos = "SELECT * FROM lista_documento WHERE idTipoUpload = '$idTipoUpload' AND idListaDocumento = '$idListaDocumento'";
     $query_arquivos = mysqli_query($con,$sql_arquivos);
     while($arq = mysqli_fetch_array($query_arquivos))
     {
         echo "<tr>";
         $doc = $arq['documento'];
-        $query = "SELECT id FROM lista_documentos WHERE documento='$doc' AND publicado='1' AND tipo_documento_id='$idTipoUpload'";
+        $query = "SELECT idListaDocumento FROM lista_documento WHERE documento='$doc' AND publicado='1' AND idTipoUpload='$idTipoUpload'";
         $envio = $con->query($query);
+        $row = $envio->fetch_array(MYSQLI_ASSOC);
 
         echo '<form method="POST" action="?perfil=' . $pagina . '" enctype="multipart/form-data">
 		<table class="table table-condensed">
@@ -591,10 +595,10 @@ function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
 				<td>Tipo de Arquivo</td>
 				<td></td>
 			</tr>';
-        $urlArquivo = $http . $arq['id'];
+        $urlArquivo = $http . $arq['idListaDocumento'];
         if (arquivosExiste($urlArquivo)) {
             echo '<td class="list_description path">';
-            $path = selecionaArquivoAnexo($http, $arq['id']);
+            $path = selecionaArquivoAnexo($http, $arq['idListaDocumento']);
             echo "<a href='" . $path . "'target='_blank'>" . $arq['documento'] . "</a>
 				</td>";
         } else {
@@ -603,9 +607,10 @@ function uploadArquivo($idOrigem, $pagina, $idListaDocumento, $idTipoUpload)
         echo "<td class='list_description'><input type='file' name='arquivo[" . $arq['sigla'] . "]'></td>";
         echo "</tr>";
         echo "</table><br>";
-        echo "<input type='hidden' name='id' value='" . $idOrigem . "' />";
+        echo "<input type='hidden' name='idPessoa' value='" . $idProjeto . "' />";
         echo "<input type='hidden' name='idTipoUpload' value='" . $idTipoUpload . "' />";
-        echo '<input type="submit" name="enviar" class="btn btn-theme btn-lg btn-block" value="Enviar">
+        echo "<input type='hidden' name='tipoPessoa' value='" . $tipoPessoa . "'  />";
+        echo '<input type="submit" name="enviar" class="btn btn-theme btn-lg btn-block" value="Fazer Upload">
 		</form>	';
     }
     echo '</div>';
