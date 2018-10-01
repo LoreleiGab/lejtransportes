@@ -2,8 +2,10 @@
 $con = bancoMysqli();
 
 // recupera os dados do cliente
-$tipo_cliente = $_POST['tipo_cliente'];
-$cliente_id = $_POST['cliente_id'];
+if(isset($_POST['tipo_cliente'])){
+    $tipo_cliente = $_POST['tipo_cliente'];
+    $cliente_id = $_POST['cliente_id'];
+}
 
 // gera o número da ordem de serviço
 $sql_n_os = "SELECT numero_os FROM os ORDER BY numero_os DESC LIMIT 0,1";
@@ -71,12 +73,99 @@ if(isset($_POST['novo_numero']))
 	}
 }
 
+if(isset($_POST['idPessoa'])){
+    $idOs = $_POST['idPessoa'];
+    $tipoPessoa = 1;
+}
+
+if(isset($_POST['apagar']))
+{
+    $idArquivo = $_POST['apagar'];
+    $sql_apagar_arquivo = "UPDATE upload_arquivo SET publicado = 0 WHERE idUploadArquivo = '$idArquivo'";
+    if(mysqli_query($con,$sql_apagar_arquivo))
+    {
+        $mensagem = "<font color='#01DF3A'><strong>Arquivo apagado com sucesso!</strong></font>";
+    }
+    else
+    {
+        $mensagem = "<font color='#FF0000'><strong>Erro ao apagar arquivo!</strong></font>";
+    }
+}
+
+if(isset($_POST['enviar']))
+{
+    $sql_arquivos = "SELECT * FROM lista_documento WHERE idTipoUpload = '$tipoPessoa'";
+    $query_arquivos = mysqli_query($con,$sql_arquivos);
+    while($arq = mysqli_fetch_array($query_arquivos))
+    {
+        $y = $arq['idListaDocumento'];
+        $x = $arq['sigla'];
+        $nome_arquivo = isset($_FILES['arquivo']['name'][$x]) ? $_FILES['arquivo']['name'][$x] : null;
+        $f_size = isset($_FILES['arquivo']['size'][$x]) ? $_FILES['arquivo']['size'][$x] : null;
+
+        //Extensões permitidas
+        $ext = array("PDF","pdf");
+
+        if($f_size > 5242880) // 5MB em bytes
+        {
+            $mensagem = "<font color='#FF0000'><strong>Erro! Tamanho de arquivo excedido! Tamanho máximo permitido: 05 MB.</strong></font>";
+        }
+        else
+        {
+            if($nome_arquivo != "")
+            {
+                $nome_temporario = $_FILES['arquivo']['tmp_name'][$x];
+                $new_name = date("YmdHis")."_".semAcento($nome_arquivo); //Definindo um novo nome para o arquivo
+                $hoje = date("Y-m-d H:i:s");
+                $dir = '../uploadsdocs/'; //Diretório para uploads
+                $allowedExts = array(".pdf", ".PDF"); //Extensões permitidas
+                $ext = strtolower(substr($nome_arquivo,-4));
+
+                if(in_array($ext, $allowedExts)) //Pergunta se a extensão do arquivo, está presente no array das extensões permitidas
+                {
+                    if(move_uploaded_file($nome_temporario, $dir.$new_name))
+                    {
+                        $sql_insere_arquivo = "INSERT INTO `upload_arquivo` (`idTipo`, `idPessoa`, `idListaDocumento`, `arquivo`, `dataEnvio`, `publicado`) VALUES ('$tipoPessoa', '$idOs', '$y', '$new_name', '$hoje', '1'); ";
+                        $query = mysqli_query($con,$sql_insere_arquivo);
+                        if($query)
+                        {
+                            $mensagem = "<font color='#01DF3A'><strong>Arquivo recebido com sucesso!</strong></font>";
+                        }
+                        else
+                        {
+                            $mensagem = "<font color='#FF0000'><strong>Erro ao gravar no banco.</strong></font>";
+                        }
+                    }
+                    else
+                    {
+                        $mensagem = "<font color='#FF0000'><strong>Erro no upload! Tente novamente.</strong></font>";
+                    }
+                }
+                else
+                {
+                    $mensagem = "<font color='#FF0000'><strong>Erro no upload! Anexar documentos somente no formato PDF.</strong></font>";
+                }
+            }
+        }
+    }
+}
+
 if(isset($_POST['detalhes']))
 {
 	$idOs = $_POST['detalhes'];
 }
 
 $os = recuperaDados("os","id",$idOs);
+if($os['pessoa'] == 1){
+    $cliente = recuperaDados("pf","id",$os['cliente']);
+    $tipo_cliente = 1;
+    $cliente_id = $os['cliente'];
+}
+else{
+    $cliente = recuperaDados("pj","id",$os['cliente']);
+    $tipo_cliente = 2;
+    $cliente_id = $os['cliente'];
+}
 ?>
 <section id="list_items" class="home-section bg-white">
 	<div class="container"><?php include 'includes/menu.php'; ?>
@@ -154,12 +243,11 @@ $os = recuperaDados("os","id",$idOs);
 					</div>
 				</form>
 
-				<div class="form-group">
-					<div class="col-md-offset-2 col-md-8"><hr/></div>
-				</div>
-
 				<!-- Gerar Número de O.S. -->
 				<?php if($os['numero_os'] == 0) {?>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8"><hr/></div>
+                    </div>
 					<form class="form-horizontal" role="form" action="?perfil=os_edit" method="post">
 						<div class="form-group">
 							<div class="col-md-offset-2 col-md-3"><strong>Nº O.S. Atual:</strong><br/>
@@ -189,6 +277,18 @@ $os = recuperaDados("os","id",$idOs);
 							<a href='../pdf/os_pdf.php?n_os=<?php echo $os['numero_os'] ?>' target='_blank' class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;'><strong>Gerar O.S.</strong></a>
 						</div>
 					</div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-10"><hr/></div>
+                    </div>
+
+                    <!-- Upload do Arquivo -->
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <?php uploadArquivo($idOs, 1,"os_edit", 1, 1); ?>
+                        </div>
+                    </div>
+                    <!-- Fim Upload do Arquivo -->
 				<?php }?>
 
 			</div>
