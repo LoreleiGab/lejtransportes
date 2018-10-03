@@ -1,14 +1,6 @@
 ﻿<?php
 
-function bancoMysqliCEP(){ // Cria conexao ao banco. Substitui o include "conecta_mysql.php" .
-	$servidor = '200.237.5.34';
-	$usuario = 'root';
-	$senha = 'lic54eca';
-	$banco = 'cep';
-	$con = mysqli_connect($servidor,$usuario,$senha,$banco); 
-	mysqli_set_charset($con,"utf8");
-	return $con;
-}
+require "../funcoes/funcoesConecta.php";
 
 $con = bancoMysqliCEP();
 
