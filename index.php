@@ -113,7 +113,7 @@ if(isset($_POST['login_adm']))
 				<div class="container">
 					<table width="100%">
 						<tr>
-							<td align="center"><span style="color: #ccc; ">2018 @ Desenvolvido por <a href="flinformatica.com.br" target="_blank">FL Informática</a></span></td>
+							<td align="center"><span style="color: #ccc; ">2018 @ Desenvolvido por <a href="http://flinformatica.com.br" target="_blank">FL Informática</a></span></td>
 						</tr>
 					</table>
 				</div>
