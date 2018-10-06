@@ -31,6 +31,12 @@
 					<li><a href="?perfil=cliente_pesquisa">Por Cliente</a></li>
 				</ul>
 			</li>
+            <li><a href="#">Usuários</a>
+                <ul class="dl-submenu">
+                    <li><a href="?perfil=user_add">Cadastra</a></li>
+                    <li><a href="?perfil=user_list">Lista</a></li>
+                </ul>
+            </li>
 			<li style="color:white;">-------------------------</li>
 			<li><a href="index.php?secao=perfil">Início</a></li>
 			<li><a href="<?php echo $pasta ?>senha">Alterar senha</a></li>
