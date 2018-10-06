@@ -40,7 +40,7 @@ function exibirDataBr($data)
 {
 	if($data == '0000-00-00' || $data == NULL)
 	{
-		return "00-00-0000";
+		return NULL;
 	}
 	else
 	{
@@ -76,9 +76,17 @@ function exibirHora($data)
 //retorna data mysql/date (a-m-d) de data/br (d/m/a)
 function exibirDataMysql($data)
 {
-	list ($dia, $mes, $ano) = explode ('/', $data);
-	$data_mysql = $ano.'-'.$mes.'-'.$dia;
-	return $data_mysql;
+    if($data == '00-00-0000' || $data == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        list ($dia, $mes, $ano) = explode ('/', $data);
+        $data_mysql = $ano.'-'.$mes.'-'.$dia;
+        return $data_mysql;
+    }
+
 }
 //retorna o endereço da página atual
 function urlAtual()
