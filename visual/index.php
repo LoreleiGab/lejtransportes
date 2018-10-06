@@ -14,17 +14,30 @@ require "../funcoes/funcoesGerais.php";
 //carrega o cabeçalho
 require "cabecalho.php";
 
-// carrega o perfil
-if(isset($_GET['perfil']))
+if($_SESSION['nivel'] == 1)
 {
-	include "../perfil/".$_GET['perfil'].".php";
+	// carrega o perfil
+	if(isset($_GET['perfil']))
+	{
+		include "../perfil/".$_GET['perfil'].".php";
+	}
+	else
+	{
+		include "../perfil/index.php";
+	}
 }
 else
 {
-	include "../perfil/index.php";
+	if(isset($_GET['funcionario']))
+	{
+		include "../funcionario/".$_GET['funcionario'].".php";
+	}
+	else
+	{
+		include "../funcionario/index.php";
+	}
 }
 
  //carrega o rodapé
 include "rodape.php";
-
 ?>

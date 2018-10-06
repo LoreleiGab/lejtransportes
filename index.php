@@ -26,6 +26,7 @@ if(isset($_POST['login']))
                 $_SESSION['login'] = $user['email'];
                 $_SESSION['nome'] = $user['nome'];
                 $_SESSION['idUser'] = $user['id'];
+                $_SESSION['nivel'] = $user['nivel_acesso'];
                 header("Location: visual/index.php");
             }
             else
