@@ -62,17 +62,17 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
 
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 11);
-   $pdf->Cell(15,$l,utf8_decode("O.S."),0,0,'L');
-   $pdf->Cell(110,$l,utf8_decode("Cliente"),0,0,'L');
-   $pdf->Cell(25,$l,utf8_decode("Valor"),0,0,'L');
-   $pdf->Cell(20,$l,utf8_decode("Data"),0,1,'L');
+   $pdf->Cell(10,$l,utf8_decode("O.S."),0,0,'L');
+   $pdf->Cell(115,$l,utf8_decode("Cliente"),0,0,'L');
+   $pdf->Cell(25,$l,utf8_decode("Data"),0,0,'L');
+   $pdf->Cell(20,$l,utf8_decode("Valor"),0,1,'L');
 
    for($h = 0; $h < $servico['numero']; $h++)
    {
       $pdf->SetX($x);
       $pdf->SetFont('Arial','', 11);
-      $pdf->Cell(15,$l,utf8_decode($servico[$h]['numero_os']),0,0,'L');
-      $pdf->Cell(110,$l,utf8_decode($servico[$h]['cliente']),0,0,'L');
+      $pdf->Cell(10,$l,utf8_decode($servico[$h]['numero_os']),0,0,'L');
+      $pdf->Cell(115,$l,utf8_decode($servico[$h]['cliente']),0,0,'L');
       $pdf->Cell(25,$l,utf8_decode($servico[$h]['data']),0,0,'L');
       $pdf->Cell(20,$l,utf8_decode("R$ ".$servico[$h]['valor_condutor']),0,0,'L');
 
