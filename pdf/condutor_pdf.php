@@ -1,10 +1,8 @@
-﻿<?php 
-
+﻿<?php
 // INSTALAÇÃO DA CLASSE NA PASTA FPDF.
 require_once("../include/lib/fpdf/fpdf.php");
 require_once("../funcoes/funcoesConecta.php");
 require_once("../funcoes/funcoesGerais.php");
-
 
 //CONEXÃO COM BANCO DE DADOS
 $con = bancoMysqli();
@@ -13,7 +11,6 @@ session_start();
 class PDF extends FPDF
 {
 }
-
 
 //CONSULTA
 $condutor_id = $_POST['condutor_id'];
@@ -94,6 +91,7 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 11);
    $pdf->Cell(125,$l,utf8_decode("ID"),0,0,'L');
+   $pdf->Cell(125,$l,utf8_decode("Observação"),0,0,'L');
    $pdf->Cell(25,$l,utf8_decode("Valor"),0,0,'L');
    $pdf->Cell(20,$l,utf8_decode("Data"),0,1,'L');
 
@@ -101,7 +99,8 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
    {
       $pdf->SetX($x);
       $pdf->SetFont('Arial','', 11);
-      $pdf->Cell(125,$l,utf8_decode($adiantamento[$h]['id']),0,0,'L');
+      $pdf->Cell(10,$l,utf8_decode($adiantamento[$h]['id']),0,0,'L');
+      $pdf->Cell(115,$l,utf8_decode($adiantamento[$h]['obs']),0,0,'L');
       $pdf->Cell(25,$l,utf8_decode($adiantamento[$h]['data']),0,0,'L');
       $pdf->Cell(20,$l,utf8_decode("R$ ".$adiantamento[$h]['valor']),0,0,'L');
 

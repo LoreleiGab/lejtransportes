@@ -463,6 +463,7 @@ function adiantamentoCondutor($condutor_id,$data_inicio,$data_fim)
 	while($x = mysqli_fetch_array($query))
 	{
 		$y[$i]['id'] = $x['id'];
+		$y[$i]['obs'] = $x['obs'];
 		$y[$i]['valor'] = dinheiroParaBr($x['valor']);
 		$y[$i]['data'] = exibirDataBr($x['data']);
 		$soma_a += $x['valor'];
