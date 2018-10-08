@@ -49,6 +49,7 @@ if($num_adiantamentos > 0)
 	while($adt = mysqli_fetch_array($query_adiantamentos))
 	{
 		$x[$i]['id'] = $adt['id'];
+		$x[$i]['obs'] = $adt['obs'];
 		$x[$i]['valor'] = dinheiroParaBr($adt['valor']);
 		$x[$i]['data'] = exibirDataBr($adt['data']);
 		$soma_a += $adt['valor'];	
@@ -107,6 +108,7 @@ else
 						<thead>
 							<tr class='list_menu'>
 								<td>ID</td>
+								<td>Observação</td>
 								<td>Valor</td>
 								<td>Data</td>
 							</tr>
@@ -117,6 +119,7 @@ else
 							{
 								echo "<tr>";
 								echo "<td class='list_description'>".$x[$h]['id']."</td>";
+								echo "<td class='list_description'>".$x[$h]['obs']."</td>";
 								echo "<td class='list_description'>".$x[$h]['valor']."</td>";
 								echo "<td class='list_description'>".$x[$h]['data']."</td>";
 								echo "</tr>";
