@@ -51,11 +51,11 @@ else
 
 if($status_id == "2")//Fechada
 {
-	$filtro_status = "AND publicado = '1' AND valor_cliente > 0";
+	$filtro_status = "AND publicado = '1' AND numero_os != '0'";
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '1' AND valor_cliente = '0.00'";
+	$filtro_status = "AND publicado = '1' AND numero_os = '0'";
 }
 else //Cancelada
 {
