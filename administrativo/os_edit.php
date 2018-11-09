@@ -23,13 +23,13 @@ if(isset($_POST['cadastra']) || isset($_POST['edita']))
 	$anotacao = $_POST['anotacao'];
 	$km_servico = $_POST['km_servico'];
 	$km_total = $_POST['km_total'];
-	$valor_cliente = dinheiroDeBr($_POST['valor_cliente']);
-	$valor_condutor = dinheiroDeBr($_POST['valor_condutor']);
+	//$valor_cliente = dinheiroDeBr($_POST['valor_cliente']);
+	//$valor_condutor = dinheiroDeBr($_POST['valor_condutor']);
 }
 
 if(isset($_POST['cadastra']))
 {
-	$sql_cadastra = "INSERT INTO os (`pessoa`, `cliente`, `condutor`, `solicitante`, `valor_cliente`, `valor_condutor`, `data`, `saida`, `km_servico`, `km_total`, `obs`, `publicado`) VALUES ('$tipo_cliente','$cliente_id','$condutor_id','$solicitante','$valor_cliente','$valor_condutor','$data','$saida','$km_servico','$km_total','$anotacao','1')";
+	$sql_cadastra = "INSERT INTO os (`pessoa`, `cliente`, `condutor`, `solicitante`, `data`, `saida`, `km_servico`, `km_total`, `obs`, `publicado`) VALUES ('$tipo_cliente','$cliente_id','$condutor_id','$solicitante','$data','$saida','$km_servico','$km_total','$anotacao','2')";
 	if(mysqli_query($con,$sql_cadastra))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Cadastrado com sucesso!</strong></font>";
@@ -47,7 +47,7 @@ if(isset($_POST['cadastra']))
 if(isset($_POST['edita']))
 {
 	$idOs = $_POST['id'];
-	$sql_edita = "UPDATE `os` SET `pessoa`='$tipo_cliente',`cliente`='$cliente_id',`condutor`='$condutor_id',`solicitante`='$solicitante',`valor_cliente`='$valor_cliente',`valor_condutor`='$valor_condutor',`data`='$data',`saida`='$saida',`km_servico`='$km_servico',`km_total`='$km_total',`obs`='$anotacao' WHERE id = $idOs";
+	$sql_edita = "UPDATE `os` SET `pessoa`='$tipo_cliente',`cliente`='$cliente_id',`condutor`='$condutor_id',`solicitante`='$solicitante',`data`='$data',`saida`='$saida',`km_servico`='$km_servico',`km_total`='$km_total',`obs`='$anotacao' 'publicado'='1' WHERE id = $idOs";
 	if(mysqli_query($con,$sql_edita))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Atualizado com sucesso!</strong></font>";
@@ -204,28 +204,32 @@ else{
 							<input type="text" class="form-control" id="datepicker01" name="data" maxlength="20" value = "<?php echo exibirDataBr($os['data']) ?>" required>
 						</div>
 						<div class="col-md-6"><strong>Saída: *</strong><br/>
-							<input type="text" class="form-control" id="hora" name="saida" value = "<?php echo $os['saida'] ?>" required>
+							<input type="text" class="form-control" id="hora" name="saida" value = "<?php 
+							echo $os['saida'] ?>" required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Anotações:</strong><br/>
-							<textarea name="anotacao" class="form-control" rows="8" required><?php echo $os['obs'] ?></textarea>
+							<textarea name="anotacao" class="form-control" rows="8" required><?php 
+							echo $os['obs'] ?></textarea>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Km serviço:</strong><br/>
-							<input type="text" class="form-control" name="km_servico" maxlength="20" value = "<?php echo ($os['km_servico']) ?>">
+								<option value="0">separar metros por "."</option>
+							<input type="text" class="form-control" name="km_servico" value = "<?php echo ($os['km_servico']) ?>">
 						</div>
 						<div class="col-md-6"><strong>Km total:</strong><br/>
-							<input type="text" class="form-control" id="valor3" name="km_total" value = "<?php 
-								echo ($os['km_total']) ?>">
+							<option value="0">separar metros por "."</option>
+							<input type="text" class="form-control" name="km_total" value = "<?php 
+								echo $os['km_total'] ?>">
 						</div>
 					</div>
-					<!--  Aqui deixa de Mostrar o valor para o usuário
+				<!--	 Aqui deixa de Mostrar o valor para o usuário
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/>
+						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/> 
 							<input type="text" class="form-control" name="valor_cliente" id='valor' value = "<?php echo dinheiroParaBr($os['valor_cliente']) ?>">
 						</div>
 						<div class="col-md-6"><strong>Valor Condutor:</strong><br/>

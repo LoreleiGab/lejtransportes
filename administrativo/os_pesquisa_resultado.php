@@ -55,7 +55,7 @@ if($status_id == "2")//Fechada
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '1' AND numero_os = '0'";
+	$filtro_status = "AND publicado = '2' AND numero_os = '0'";
 }
 else //Cancelada
 {
@@ -78,7 +78,7 @@ $numPaginas = ceil($total/$registros);
 $inicio = ($registros*$pagina)-$registros;
 
 //seleciona os itens por página
-$sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status ORDER BY id DESC LIMIT $inicio,$registros";
+$sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status ORDER BY numero_os DESC LIMIT $inicio,$registros";
 $query_lista = mysqli_query($con,$sql_lista);
 
 //conta o total de itens

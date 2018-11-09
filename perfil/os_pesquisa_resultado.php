@@ -55,7 +55,7 @@ if($status_id == "2")//Fechada
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '1' AND numero_os = '0'";
+	$filtro_status = "AND publicado = '2' AND numero_os = '2'";
 }
 else //Cancelada
 {
