@@ -45,7 +45,7 @@ else
 	$x['num'] = 0;
 }
 
-$sql_adiantamentos = "SELECT * FROM `adiantamentos` WHERE funcionario = '$condutor_id' AND `data` BETWEEN '$data_inicio' AND '$data_fim'";
+$sql_adiantamentos = "SELECT * FROM `adiantamentos` WHERE funcionario = '$condutor_id' AND `data` 	BETWEEN '$data_inicio' AND '$data_fim'";
 $query_adiantamentos = mysqli_query($con,$sql_adiantamentos);
 $num_adiantamentos = mysqli_num_rows($query_adiantamentos);
 if($num_adiantamentos > 0)
@@ -55,6 +55,7 @@ if($num_adiantamentos > 0)
 	while($adt = mysqli_fetch_array($query_adiantamentos))
 	{
 		$x[$i]['id'] = $adt['id'];
+		$x[$i]['obs'] = $adt['obs'];
 		$x[$i]['valor'] = dinheiroParaBr($adt['valor']);
 		$x[$i]['data'] = exibirDataBr($adt['data']);
 		$soma_a += $adt['valor'];	
@@ -87,7 +88,7 @@ else
 					<table class='table table-condensed'>
 						<thead>
 							<tr class='list_menu'>
-								<td>O.S.</td>
+								<td>O.S</td>
 								<td>Cliente</td>
 								<td>Valor condutor</td>
 								<td>Data</td>
@@ -117,6 +118,7 @@ else
 						<thead>
 							<tr class='list_menu'>
 								<td>ID</td>
+								<td>Anotação</td>
 								<td>Valor</td>
 								<td>Data</td>
 							</tr>
@@ -127,6 +129,7 @@ else
 							{
 								echo "<tr>";
 								echo "<td class='list_description'>".$x[$h]['id']."</td>";
+								echo "<td class='list_description'>".$x[$h]['obs']."</td>";
 								echo "<td class='list_description'>".$x[$h]['valor']."</td>";
 								echo "<td class='list_description'>".$x[$h]['data']."</td>";
 								echo "</tr>";
@@ -149,7 +152,7 @@ else
 							<input type="hidden" name="condutor_id" value="<?php echo $condutor_id ?>">
 							<input type="hidden" name="data_inicio" value="<?php echo $data_inicio ?>">
 							<input type="hidden" name="data_fim" value="<?php echo $data_fim ?>">
-							<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório">
+						<!-- Retirado botão de gerar relatório do condutor pois não há necessidade	<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório"> !-->
 						</div>
 					</div>
 				</form>

@@ -54,7 +54,7 @@ $adiantamento = recuperaDados("adiantamentos","id",$idAdiantamento);
 			<div class="col-md-offset-1 col-md-10">
 				<h5><?php if(isset($mensagem)){echo $mensagem;};?></h5>
 				<form class="form-horizontal" role="form" action="?perfil=adiantamento_edit" method="post">
-
+						<!-- Seleciona condutor -->
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Selecione o condutor: *</strong><br/>
 							<select class="form-control" name="condutor_id" required>
@@ -63,16 +63,23 @@ $adiantamento = recuperaDados("adiantamentos","id",$idAdiantamento);
 							</select>
 						</div>
 					</div>
-
+							<!-- ID -->			
+					<div class="form-group">
+						<div class="col-md-offset-5 col-md-2"><strong>ID:</strong><br/>
+							<input type="text" class="form-control" id='id' name="id" value="<?php echo($adiantamento['id']) ?>">
+						</div>
+					</div>
+							<!--Data -->	
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Data: *</strong><br/>
 							<input type="text" class="form-control" id="datepicker01" name="data" maxlength="20" value="<?php echo exibirDataBr($adiantamento['data']) ?>">
 						</div>
+						<!-- Valor -->
 						<div class="col-md-6"><strong>Valor: *</strong><br/>
 							<input type="text" class="form-control" id='valor' name="valor" value="<?php echo dinheiroParaBr($adiantamento['valor']) ?>">
 						</div>
 					</div>
-
+						<!-- Anotações -->
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8"><strong>Anotações:</strong><br/>
 							<textarea name="anotacao" class="form-control" rows="8"><?php echo $adiantamento['obs'] ?></textarea>

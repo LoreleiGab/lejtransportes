@@ -23,7 +23,7 @@ $inicio = ($registros*$pagina)-$registros;
 $sql_lista = "SELECT adiantamentos.id, nome, valor, data 
 			FROM adiantamentos 
 			INNER JOIN funcionarios ON funcionarios.id = adiantamentos.funcionario
-			ORDER BY data DESC limit $inicio,$registros ";
+			ORDER BY id DESC limit $inicio,$registros ";
 $query_lista = mysqli_query($con,$sql_lista);
 
 //conta o total de itens
@@ -62,6 +62,7 @@ else
 					<table class='table table-condensed'>
 						<thead>
 							<tr class='list_menu'>
+								<td>ID</td>
 								<td>Condutor</td>
 								<td>Valor</td>
 								<td>Data</td>
@@ -73,6 +74,7 @@ else
 							for($h = 0; $h < $x['num']; $h++)
 							{
 								echo "<tr>";
+								echo '<td class="list_description">'.$x[$h]['id'].'</td>';
 								echo '<td class="list_description">'.$x[$h]['nome'].'</td>';
 								echo '<td class="list_description">'.$x[$h]['valor'].'</td>';
 								echo '<td class="list_description">'.$x[$h]['data'].'</td>';

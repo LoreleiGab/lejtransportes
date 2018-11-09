@@ -6,12 +6,13 @@
         </div>
         <div class="form-group">
 			<h5>L&J Transportes</h5>
-            <p align="justify">L&J Transportes atua no ramo de transporte há 1 (um) ano com experiência de 5 anos no mercado de trabalho, fundada pelo Lucas Carloto onde trabalhou com diversas formas de entrega após estudo e análise do mercado no segmento de transportes rápidos, a L&J foi desenvolvida com intuito de servir seus clientes, constatamos que a segurança, agilidade e qualidade são os nossos principais fatores, tornando-se exigências primordiais.</p>
+            <p align="justify">L&J Transportes atua no ramo de transporte desde de 2016 com experiência de 10 anos no mercado de trabalho, fundada pelo Lucas Ramalho onde trabalhou com diversas formas de entrega após estudo e análise do mercado no segmento de transportes rápidos junto com o seu primo Ivamar Ramalho a L&J foi fundada e desenvolvida com intuito de servir seus clientes, constatamos que a segurança, agilidade e qualidade são os nossos principais fatores, tornando-se exigências primordiais em nosso ramo.</p>
             <p align="justify">Baseando-se nestes princípios a empresa L&J TRANSPORTES foi criada, para proporcionar aos nossos clientes o que é fundamental no ramo. SEGURANÇA, AGILIDADE E QUALIDADE.</p>
+            <p align="center"><b><?php echo $_SESSION['nome']; ?></b> Agradecemos a sua cooperação e estamos a sua disposição!</p>
 		</div>
         <div class="well">
             <label><h6>Pesquisar Serviços</h6></label>
-            <form method="POST" action="?funcionario=condutor_pesquisa_resultado" class="form-horizontal" role="form">
+            <form method="POST" action="?clientes=condutor_pesquisa_resultado" class="form-horizontal" role="form">
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-6"><label>De</label>
                         <input type="text" name="data_inicio" id="datepicker01" class="form-control" required>

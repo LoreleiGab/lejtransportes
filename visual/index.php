@@ -14,10 +14,12 @@ require "../funcoes/funcoesGerais.php";
 //carrega o cabeçalho
 require "cabecalho.php";
 
-if($_SESSION['nivel'] == 1)
+
+$nivel = $_SESSION['nivel'];
+switch($nivel)
 {
 	// carrega o perfil
-	if(isset($_GET['perfil']))
+	case 1: if(isset($_GET['perfil']) == 1)
 	{
 		include "../perfil/".$_GET['perfil'].".php";
 	}
@@ -25,19 +27,47 @@ if($_SESSION['nivel'] == 1)
 	{
 		include "../perfil/index.php";
 	}
-}
-else
-{
-	if(isset($_GET['funcionario']))
+break;
+
+	case 2: if(isset($_GET['funcionario']) == 2)
 	{
-		include "../funcionario/".$_GET['funcionario'].".php";
+		include "../condutor/".$_GET['funcionario'].".php";
 	}
 	else
 	{
-		include "../funcionario/index.php";
+		include "../condutor/index.php";
 	}
-}
+break;
+	case 3: if(isset($_GET['cliente']) == 3)
+	{
+		include "../cliente/".$_GET['cliente'].".php";
+	}
+	else
+	{
+		include "../cliente/index.php";
+	}
+break;
 
+	case 4: if(isset($_GET['perfil']) == 4)
+	{
+		include "../administrativo/".$_GET['perfil'].".php";
+	}
+	else
+	{
+		include "../administrativo/index.php";
+	}
+break;
+
+	case 5: if(isset($_GET['supervisor']) == 5)
+	{
+		include "../supervisor/".$_GET['supervisor'].".php";
+	}
+	else
+	{
+		include "../supervisor/index.php";
+	}
+break;
+}
  //carrega o rodapé
 include "rodape.php";
 ?>

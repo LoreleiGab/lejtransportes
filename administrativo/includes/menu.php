@@ -11,32 +11,12 @@
 					<li><a href="?perfil=pj_list">Lista PJ</a></li>
 				</ul>
 			</li>
-			<li><a href="#">Condutor</a>
-				<ul class="dl-submenu">
-					<li><a href="?perfil=condutor_add">Cadastra Condutor</a></li>
-					<li><a href="?perfil=condutor_list">Lista</a></li>
-					<li><a href="?perfil=adiantamento_add">Cadastra Adiantamento</a></li>
-					<li><a href="?perfil=adiantamento_list">Lista Adiantamento</a></li>
-				</ul>
-			</li>
 			<li><a href="#">O.S.</a>
 				<ul class="dl-submenu">
 					<li><a href="?perfil=os_add_cliente">Cadastra</a></li>
 					<li><a href="?perfil=os_pesquisa">Pesquisa</a></li>
 				</ul>
 			</li>
-			<li><a href="#">Relatórios</a>
-				<ul class="dl-submenu">
-					<li><a href="?perfil=condutor_pesquisa">Por Condutor</a></li>
-					<li><a href="?perfil=cliente_pesquisa">Por Cliente</a></li>
-				</ul>
-			</li>
-            <li><a href="#">Usuários</a>
-                <ul class="dl-submenu">
-                    <li><a href="?perfil=user_add">Cadastra</a></li>
-                    <li><a href="?perfil=user_list">Lista</a></li>
-                </ul>
-            </li>
 			<li style="color:white;">-------------------------</li>
 			<li><a href="index.php?secao=perfil">Início</a></li>
 			<li><a href="<?php echo $pasta ?>senha">Alterar senha</a></li>

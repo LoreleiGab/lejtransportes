@@ -29,6 +29,9 @@
                             <select class="form-control" name="nivel_acesso" required>
                                 <option value="1">Administrador</option>
                                 <option value="2">Condutor</option>
+                                <option value="3">Cliente</option>
+                                <option value="4">Administrador</option>
+                                <option value="5">Supervisor</option>
                             </select>
 						</div>
 						<div class="col-md-6"><strong>Condutor relacionado:</strong><br/>
@@ -37,10 +40,26 @@
                                 <?php echo geraOpcao("funcionarios","") ?>
                             </select>
 						</div>
+						
 					</div>
 					
 					<div class="form-group">
-						<div class="col-md-offset-4 col-md-6"><strong>Senha: *</strong><br/>
+						<div class="col-md-offset-2 col-md-6"><strong>Cliente PJ relacionado:</strong><br/>
+                            <select class="form-control" name="pj_id">
+                                <option value="">Selecione...</option>
+                                <?php echo geraOpcao("pj","") ?>
+                            </select>
+						</div>
+							<div class="col-md-6"><strong>Cliente PF relacionado:</strong><br/>
+                            <select class="form-control" name="pf_id">
+                                <option value="">Selecione...</option>
+                                <?php echo geraOpcao("pf","") ?>
+                            </select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-6"><strong>Senha: *</strong><br/>
 							<input type="password" class="form-control" name="senha" required>
 						</div>
 					</div>
