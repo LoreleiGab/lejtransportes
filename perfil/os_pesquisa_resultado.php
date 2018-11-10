@@ -97,6 +97,7 @@ $query_lista = mysqli_query($con,$sql_lista);
 							<tr class='list_menu'>
 								<td>O.S.</td>
 								<td>Cliente</td>
+								<td>Condutor</td>
 								<td>Valor condutor</td>
 								<td>Data</td>
 								<td></td>
@@ -118,9 +119,11 @@ $query_lista = mysqli_query($con,$sql_lista);
 									$cliente = $pj['nome'];
 									$cliente_id = $pj['id'];
 								}
+								$condutor = recuperaDados("funcionarios","id",$os['condutor']);
 								echo "<tr>";
 								echo "<td class='list_description'>".$os['numero_os']."</td>";
 								echo "<td class='list_description'>".$cliente."</td>";
+								echo "<td class='list_description'>".$condutor['nome']."</td>";
 								echo "<td class='list_description'>".dinheiroParaBr($os['valor_condutor'])."</td>";
 								echo "<td class='list_description'>".exibirDataBr($os['data'])."</td>";
 								echo "<td class='list_description'>
@@ -135,7 +138,7 @@ $query_lista = mysqli_query($con,$sql_lista);
 							}
 							?>
 							<tr>
-							<td colspan="5" bgcolor="#DEDEDE">
+							<td colspan="6" bgcolor="#DEDEDE">
 							<?php
 								//exibe a paginação
 								echo "<strong>Páginas</strong>";
