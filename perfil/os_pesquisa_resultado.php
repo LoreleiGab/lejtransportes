@@ -4,7 +4,6 @@ $con = bancoMysqli();
 //verifica a página atual caso seja informada na URL, senão atribui como 1ª página
 $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 
-
 if(isset($_POST['condutor_id']))
 {
 	$_SESSION['condutor_id'] = $_POST['condutor_id'];
@@ -13,11 +12,15 @@ if(isset($_POST['condutor_id']))
 if(isset($_POST['data_inicio']))
 {
 	$_SESSION['data_inicio'] = $_POST['data_inicio'];
+	$data_inicio = exibirDataMysql($_POST['data_inicio']);
+	$_SESSION['data_inicio'] = $data_inicio;
 }
 
 if(isset($_POST['data_fim']))
 {
 	$_SESSION['data_fim'] = $_POST['data_fim'];
+	$data_fim = exibirDataMysql($_POST['data_fim']);
+	$_SESSION['data_fim'] = $data_fim;
 }
 
 if(isset($_POST['status_id']))
@@ -69,7 +72,7 @@ $query_lista = mysqli_query($con,$sql_lista);
 $total = mysqli_num_rows($query_lista);
 
 //seta a quantidade de itens por página
-$registros = 20;
+$registros = 30;
 
 //calcula o número de páginas arredondando o resultado para cima
 $numPaginas = ceil($total/$registros);

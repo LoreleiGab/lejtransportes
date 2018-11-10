@@ -4,7 +4,6 @@ $con = bancoMysqli();
 //verifica a página atual caso seja informada na URL, senão atribui como 1ª página
 $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 
-
 if(isset($_POST['condutor_id']))
 {
 	$_SESSION['condutor_id'] = $_POST['condutor_id'];
@@ -12,12 +11,17 @@ if(isset($_POST['condutor_id']))
 
 if(isset($_POST['data_inicio']))
 {
+
 	$_SESSION['data_inicio'] = $_POST['data_inicio'];
+	$data_inicio = exibirDataMysql($_POST['data_inicio']);
+	$_SESSION['data_inicio'] = $data_inicio;
 }
 
 if(isset($_POST['data_fim']))
 {
 	$_SESSION['data_fim'] = $_POST['data_fim'];
+	$data_fim = exibirDataMysql($_POST['data_fim']);
+	$_SESSION['data_fim'] = $data_fim;
 }
 
 if(isset($_POST['status_id']))
@@ -104,11 +108,6 @@ $total = mysqli_num_rows($query_lista);
 						</thead>
 						<tbody>
 							<?php
-							$funcionarios = recuperaDados("funcionarios","id",$os['condutor']);
-									$condutor = $funcionarios['nome'];
-									$condutor_id = $funcionarios['id'];
-							
-
 							while($os = mysqli_fetch_array($query_lista))
 							{
 								if($os['pessoa'] == 1)
@@ -123,10 +122,11 @@ $total = mysqli_num_rows($query_lista);
 									$cliente = $pj['nome'];
 									$cliente_id = $pj['id'];
 								}
+								$condutor = recuperaDados("funcionarios","id",$os['condutor']);
 								echo "<tr>";
 								echo "<td class='list_description'>".$os['numero_os']."</td>";
 								echo "<td class='list_description'>".$cliente."</td>";
-								echo "<td class='list_description'>".$condutor."</td>";
+								echo "<td class='list_description'>".$condutor['nome']."</td>";
 								echo "<td class='list_description'>".exibirDataBr($os['data'])."</td>";
 								echo "<td class='list_description'>
 										<form method='POST' action='?perfil=os_edit'>
