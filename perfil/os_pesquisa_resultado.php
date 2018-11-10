@@ -55,7 +55,7 @@ if($status_id == "2")//Fechada
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '1' AND valor_condutor >='0' AND valor_cliente <= '12.0'";
+	$filtro_status = "AND publicado = '1' AND valor_condutor ='0' AND valor_cliente <= '12.0'";
 }
 else //Cancelada
 {
