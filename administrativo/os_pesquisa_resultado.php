@@ -11,7 +11,6 @@ if(isset($_POST['condutor_id']))
 
 if(isset($_POST['data_inicio']))
 {
-
 	$_SESSION['data_inicio'] = $_POST['data_inicio'];
 	$data_inicio = exibirDataMysql($_POST['data_inicio']);
 	$_SESSION['data_inicio'] = $data_inicio;
