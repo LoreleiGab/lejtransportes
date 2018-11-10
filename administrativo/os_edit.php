@@ -23,8 +23,6 @@ if(isset($_POST['cadastra']) || isset($_POST['edita']))
 	$anotacao = $_POST['anotacao'];
 	$km_servico = $_POST['km_servico'];
 	$km_total = $_POST['km_total'];
-	//$valor_cliente = dinheiroDeBr($_POST['valor_cliente']);
-	//$valor_condutor = dinheiroDeBr($_POST['valor_condutor']);
 }
 
 if(isset($_POST['cadastra']))
@@ -196,7 +194,7 @@ else{
 								<option value="0">Selecione...</option>
 								<?php echo geraOpcao("funcionarios",$os['condutor']) ?>
 							</select>
-						</div>
+						</div> 	
 					</div>
 
 					<div class="form-group">

@@ -50,16 +50,16 @@ else
 
 
 if($status_id == "2")//Fechada
-{
-	$filtro_status = "AND publicado = '1' AND numero_os != '0'";
+{ 
+	$filtro_status = "AND publicado = '1' AND valor_condutor !='0'";
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '2' AND numero_os = '0'";
+	$filtro_status = "AND publicado = '1' AND valor_condutor ='0' AND valor_cliente >= '0'";
 }
 else //Cancelada
 {
-	$filtro_status = "AND publicado = '$status_id'";
+	$filtro_status = "AND publicado = '0' '$status_id'";
 }
 
 $sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status";
@@ -97,13 +97,18 @@ $total = mysqli_num_rows($query_lista);
 							<tr class='list_menu'>
 								<td>O.S.</td>
 								<td>Cliente</td>
-								<td>Valor condutor</td>
+								<td>Condutor</td>
 								<td>Data</td>
 								<td></td>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
+							$funcionarios = recuperaDados("funcionarios","id",$os['condutor']);
+									$condutor = $funcionarios['nome'];
+									$condutor_id = $funcionarios['id'];
+							
+
 							while($os = mysqli_fetch_array($query_lista))
 							{
 								if($os['pessoa'] == 1)
@@ -121,7 +126,7 @@ $total = mysqli_num_rows($query_lista);
 								echo "<tr>";
 								echo "<td class='list_description'>".$os['numero_os']."</td>";
 								echo "<td class='list_description'>".$cliente."</td>";
-								echo "<td class='list_description'>".dinheiroParaBr($os['valor_condutor'])."</td>";
+								echo "<td class='list_description'>".$condutor."</td>";
 								echo "<td class='list_description'>".exibirDataBr($os['data'])."</td>";
 								echo "<td class='list_description'>
 										<form method='POST' action='?perfil=os_edit'>
