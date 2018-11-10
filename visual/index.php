@@ -58,9 +58,9 @@ break;
 	}
 break;
 
-	case 5: if(isset($_GET['supervisor']) == 5)
+	case 5: if(isset($_GET['perfil']) == 5)
 	{
-		include "../supervisor/".$_GET['supervisor'].".php";
+		include "../supervisor/".$_GET['perfil'].".php";
 	}
 	else
 	{
