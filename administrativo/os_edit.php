@@ -29,7 +29,7 @@ if(isset($_POST['cadastra']) || isset($_POST['edita']))
 
 if(isset($_POST['cadastra']))
 {
-	$sql_cadastra = "INSERT INTO os (`pessoa`, `cliente`, `condutor`, `solicitante`, `data`, `saida`, `km_servico`, `km_total`, `obs`, `publicado`) VALUES ('$tipo_cliente','$cliente_id','$condutor_id','$solicitante','$data','$saida','$km_servico','$km_total','$anotacao','2')";
+	$sql_cadastra = "INSERT INTO os (`pessoa`, `cliente`, `condutor`, `solicitante`, `data`, `saida`, `km_servico`, `km_total`, `obs`, `publicado`) VALUES ('$tipo_cliente','$cliente_id','$condutor_id','$solicitante','$data','$saida','$km_servico','$km_total','$anotacao','1')";
 	if(mysqli_query($con,$sql_cadastra))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Cadastrado com sucesso!</strong></font>";
@@ -47,7 +47,7 @@ if(isset($_POST['cadastra']))
 if(isset($_POST['edita']))
 {
 	$idOs = $_POST['id'];
-	$sql_edita = "UPDATE `os` SET `pessoa`='$tipo_cliente',`cliente`='$cliente_id',`condutor`='$condutor_id',`solicitante`='$solicitante',`data`='$data',`saida`='$saida',`km_servico`='$km_servico',`km_total`='$km_total',`obs`='$anotacao' 'publicado'='1' WHERE id = $idOs";
+	$sql_edita = "UPDATE `os` SET `pessoa`='$tipo_cliente',`cliente`='$cliente_id',`condutor`='$condutor_id',`solicitante`='$solicitante',`data`='$data',`saida`='$saida',`km_servico`='$km_servico',`km_total`='$km_total',`obs`='$anotacao' WHERE id = $idOs";
 	if(mysqli_query($con,$sql_edita))
 	{
 		$mensagem = "<font color='#01DF3A'><strong>Atualizado com sucesso!</strong></font>";
@@ -227,16 +227,6 @@ else{
 								echo $os['km_total'] ?>">
 						</div>
 					</div>
-				<!--	 Aqui deixa de Mostrar o valor para o usuário
-					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/> 
-							<input type="text" class="form-control" name="valor_cliente" id='valor' value = "<?php echo dinheiroParaBr($os['valor_cliente']) ?>">
-						</div>
-						<div class="col-md-6"><strong>Valor Condutor:</strong><br/>
-							<input type="text" class="form-control" name="valor_condutor" id='valor01' value = "<?php echo dinheiroParaBr($os['valor_condutor']) ?>">
-						</div>
-					</div> --!>
-
 					<!-- Botão para Gravar -->
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8">

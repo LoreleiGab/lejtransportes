@@ -50,16 +50,16 @@ else
 
 
 if($status_id == "2")//Fechada
-{
-	$filtro_status = "AND publicado = '1' AND valor_cliente != '0'";
+{ 
+	$filtro_status = "AND publicado = '1' AND valor_condutor !='0'";
 }
 elseif($status_id == "1")//Aberta
 {
-	$filtro_status = "AND publicado = '1' AND valor_cliente = '0;00'";
+	$filtro_status = "AND publicado = '1' AND valor_condutor >='0' AND valor_cliente <= '12.0'";
 }
 else //Cancelada
 {
-	$filtro_status = "AND publicado = '$status_id'";
+	$filtro_status = "AND publicado = '0' '$status_id'";
 }
 
 $sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status";
@@ -78,11 +78,11 @@ $numPaginas = ceil($total/$registros);
 $inicio = ($registros*$pagina)-$registros;
 
 //seleciona os itens por página
-$sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status ORDER BY id DESC LIMIT $inicio,$registros";
+$sql_lista = "SELECT * FROM `os` WHERE id > 0 $filtro_condutor $filtro_data $filtro_status ORDER BY numero_os DESC LIMIT $inicio,$registros";
 $query_lista = mysqli_query($con,$sql_lista);
-
-//conta o total de itens
-$total = mysqli_num_rows($query_lista);
+		
+	//conta o total de itens
+	$total = mysqli_num_rows($query_lista);
 ?>
 <section id="list_items" class="home-section bg-white">
 	<div class="container"><?php include 'includes/menu.php'; ?>

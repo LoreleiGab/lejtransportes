@@ -80,25 +80,16 @@ $n_os = $campo['numero_os'] + 1;
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Km serviço:</strong><br/>
-							<input type="number" class="form-control" name="km_servico" maxlength="20">
 							<option value="0">separar metros por "."</option>
+							<input type="number" class="form-control" name="km_servico" maxlength="20">
+							
 						</div>
 						<div class="col-md-6"><strong>Km total:</strong><br/>
 							<option value="0">separar metros por "."</option>
 							<input type="number" class="form-control" name="km_total">
+						<br>		
 						</div>
-					</div>					
-						<!-- Não mostrar valor de cliente na hora de cadastrar
-					<div class="form-group">
-						<div class="col-md-offset-2 col-md-6"><strong>Valor Cliente:</strong><br/>
-							
-							<input type="text" class="form-control" id='valor' name="valor_cliente">
-						</div>
-						<div class="col-md-6"><strong>Valor Condutor:</strong><br/>
-							<option value="0">separar metros por "."</option>
-							<input type="text" class="form-control" id='valor01' name="valor_condutor">
-						</div>
-					</div> --!>
+				
 
 					<!-- Botão para Gravar -->
 					<div class="form-group">
