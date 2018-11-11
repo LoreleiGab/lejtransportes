@@ -89,9 +89,8 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
       $pdf->SetFont('Arial','', 10);
       $pdf->Cell(15,$l,utf8_decode($servico[$h]['numero_os']),0,0,'L');
       $pdf->Cell(110,$l,utf8_decode($servico[$h]['nome_condutor']),0,0,'L');
-      $pdf->Cell(25,$l,utf8_decode($servico[$h]['data']),0,0,'L');
       $pdf->Cell(20,$l,utf8_decode("R$ ".$servico[$h]['valor_cliente']),0,0,'L');
-
+      $pdf->Cell(25,$l,utf8_decode($servico[$h]['data']),0,0,'L');
       $pdf->Ln();
    }
 
