@@ -135,7 +135,6 @@ else
 						echo "Do dia ".exibirDataBr($data_inicio)." e ".exibirDataBr($data_fim)." há um total de <strong>R$ ". dinheiroParaBr($soma_s)."</strong> em serviços e <strong>R$ ". dinheiroParaBr($soma_a)."</strong> em adiantamentos, totalizando: <strong>R$ ". dinheiroParaBr($total)."</strong>"; 
 					?>
 				</div>
-
 				<form method="POST" target="_blank" action="../pdf/condutor_pdf.php" class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-8">
