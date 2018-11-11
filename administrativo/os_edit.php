@@ -75,21 +75,6 @@ if(isset($_POST['idPessoa'])){
     $idOs = $_POST['idPessoa'];
     $tipoPessoa = 1;
 }
-/* Aqui Não deixa o Usuário apagar
-if(isset($_POST['apagar']))
-{
-    $idArquivo = $_POST['apagar'];
-    $sql_apagar_arquivo = "UPDATE upload_arquivo SET publicado = 0 WHERE idUploadArquivo = '$idArquivo'";
-    if(mysqli_query($con,$sql_apagar_arquivo))
-    {
-        $mensagem = "<font color='#01DF3A'><strong>Arquivo apagado com sucesso!</strong></font>";
-    }
-    else
-    {
-        $mensagem = "<font color='#FF0000'><strong>Erro ao apagar arquivo!</strong></font>";
-    }
-} */
-
 if(isset($_POST['enviar']))
 {
     $sql_arquivos = "SELECT * FROM lista_documento WHERE idTipoUpload = '$tipoPessoa'";
