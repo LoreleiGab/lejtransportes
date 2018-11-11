@@ -142,7 +142,6 @@ else
 							<input type="hidden" name="condutor_id" value="<?php echo $condutor_id ?>">
 							<input type="hidden" name="data_inicio" value="<?php echo $data_inicio ?>">
 							<input type="hidden" name="data_fim" value="<?php echo $data_fim ?>">
-							<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório">
 						</div>
 					</div>
 				</form>

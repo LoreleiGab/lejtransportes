@@ -60,7 +60,7 @@ $x['num'] = $i;
 							<tr class='list_menu'>
 								<td>O.S.</td>
 								<td>Cliente</td>
-								<td>Valor condutor</td>
+								<td>Valor cliente</td>
 								<td>Data</td>
 							</tr>
 						</thead>
@@ -93,7 +93,6 @@ $x['num'] = $i;
                             <input type="hidden" name="pj_id" value="<?php echo $pj_id ?>">
 							<input type="hidden" name="data_inicio" value="<?php echo $data_inicio ?>">
 							<input type="hidden" name="data_fim" value="<?php echo $data_fim ?>">
-							<input type="submit" class="'btn btn-theme btn-lg btn-block" style='border-radius: 10px;' value="Gerar Relatório">
 						</div>
 					</div>
 				</form>
