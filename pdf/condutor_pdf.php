@@ -51,7 +51,6 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
    $pdf->Cell(15,$l,utf8_decode($condutor['nome']),0,1,'L');
 
    $pdf->Ln();
-   $pdf->Ln();
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 12);
@@ -60,9 +59,9 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 11);
    $pdf->Cell(10,$l,utf8_decode("O.S."),0,0,'L');
-   $pdf->Cell(115,$l,utf8_decode("Cliente"),0,0,'L');
-   $pdf->Cell(25,$l,utf8_decode("Data"),0,0,'L');
-   $pdf->Cell(20,$l,utf8_decode("Valor"),0,1,'L');
+   $pdf->Cell(120,$l,utf8_decode("Cliente"),0,0,'L');
+   $pdf->Cell(20,$l,utf8_decode("Data"),0,0,'L');
+   $pdf->Cell(0,$l,utf8_decode("Valor"),0,1,'L');
 
    for($h = 0; $h < $servico['numero']; $h++)
    {
@@ -70,7 +69,7 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
       $pdf->SetFont('Arial','', 11);
       $pdf->Cell(10,$l,utf8_decode($servico[$h]['numero_os']),0,0,'L');
       $pdf->Cell(115,$l,utf8_decode($servico[$h]['cliente']),0,0,'L');
-      $pdf->Cell(25,$l,utf8_decode($servico[$h]['data']),0,0,'L');
+      $pdf->Cell(22,$l,utf8_decode($servico[$h]['data']),0,0,'L');
       $pdf->Cell(20,$l,utf8_decode("R$ ".$servico[$h]['valor_condutor']),0,0,'L');
 
       $pdf->Ln();
@@ -78,8 +77,8 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
 
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 12);
-   $pdf->Cell(150,$l,utf8_decode("TOTAL"),'T',0,'R');
-   $pdf->Cell(20,$l,utf8_decode($servico['soma_s']),'T',1,'L');
+   $pdf->Cell(140,$l,utf8_decode("TOTAL"),'T',0,'R');
+   $pdf->Cell(30,$l,utf8_decode($servico['soma_s']),'T',0,'L');
 
    $pdf->Ln();
    $pdf->Ln();
@@ -90,27 +89,26 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
 
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 11);
-   $pdf->Cell(125,$l,utf8_decode("ID"),0,0,'L');
-   $pdf->Cell(125,$l,utf8_decode("Observação"),0,0,'L');
-   $pdf->Cell(25,$l,utf8_decode("Valor"),0,0,'L');
-   $pdf->Cell(20,$l,utf8_decode("Data"),0,1,'L');
-
-   for($h = 0; $h < $adiantamento['numero']; $h++)
+   $pdf->Cell(10,$l,utf8_decode("ID"),0,0,'L');
+   $pdf->Cell(120,$l,utf8_decode("Observação"),0,0,'L');
+   $pdf->Cell(20,$l,utf8_decode("Data"),0,0,'L');
+   $pdf->Cell(0,$l,utf8_decode("Valor"),0,1,'L');
+      for($h = 0; $h < $adiantamento['numero']; $h++)
    {
       $pdf->SetX($x);
       $pdf->SetFont('Arial','', 11);
       $pdf->Cell(10,$l,utf8_decode($adiantamento[$h]['id']),0,0,'L');
       $pdf->Cell(115,$l,utf8_decode($adiantamento[$h]['obs']),0,0,'L');
-      $pdf->Cell(25,$l,utf8_decode($adiantamento[$h]['data']),0,0,'L');
-      $pdf->Cell(20,$l,utf8_decode("R$ ".$adiantamento[$h]['valor']),0,0,'L');
+      $pdf->Cell(22,$l,utf8_decode($adiantamento[$h]['data']),0,0,'L');
+      $pdf->Cell(0,$l,utf8_decode("R$ ".$adiantamento[$h]['valor']),0,0,'L');
 
       $pdf->Ln();
    }
 
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 12);
-   $pdf->Cell(150,$l,utf8_decode("TOTAL"),T,0,'R');
-   $pdf->Cell(20,$l,utf8_decode($adiantamento['soma_a']),T,0,'L');
+   $pdf->Cell(145,$l,utf8_decode("TOTAL"),T,0,'R');
+   $pdf->Cell(25,$l,utf8_decode($adiantamento['soma_a']),T,0,'L');
 
    $pdf->Ln();
    $pdf->Ln();
@@ -129,7 +127,7 @@ $pdf->SetXY($x,35);// SetXY - DEFINE O X (largura) E O Y (altura) NA PÁGINA
    $pdf->SetFont('Arial','B', 11);
    $pdf->Cell(12,$l,utf8_decode("Total:"),0,0,'L');
    $pdf->SetFont('Arial','', 11);
-   $pdf->Cell(20,$l,utf8_decode("R$ ".dinheiroParaBr($total)."."),0,1,'L');
+   $pdf->Cell(20,$l,utf8_decode("R$ ".dinheiroParaBr($total).""),0,1,'L');
 
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 11);
