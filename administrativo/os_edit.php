@@ -201,9 +201,11 @@ else{
 
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-6"><strong>Km serviço:</strong><br/>
+								<option value="0">separar metros por "."</option>
 							<input type="text" class="form-control" name="km_servico" value = "<?php echo ($os['km_servico']) ?>">
 						</div>
 						<div class="col-md-6"><strong>Km total:</strong><br/>
+							<option value="0">separar metros por "."</option>
 							<input type="text" class="form-control" name="km_total" value = "<?php 
 								echo $os['km_total'] ?>">
 						</div>
