@@ -12,7 +12,7 @@
 						<thead>
 							<tr class='list_menu'>
 								<td>Nome</td>
-								<td>Email</td>
+								<td>Usuário</td>
 								<td>Telefone</td>
 								<td></td>
 							</tr>

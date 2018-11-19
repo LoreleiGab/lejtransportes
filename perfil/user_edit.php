@@ -88,7 +88,7 @@ $user = recuperaDados("usuarios","id",$idUsuario);
                             <input type="text" class="form-control" name="telefone" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" required  value="<?= $user['telefone'] ?>">
                         </div>
 
-						<div class="col-md-6"><strong>E-mail: *</strong><br/>
+						<div class="col-md-6"><strong>Usuário: *</strong><br/>
 							<input type="text" class="form-control" name="email" placeholder="E-mail" maxlength="60" required  value="<?= $user['email'] ?>">
 						</div>
 					</div>
