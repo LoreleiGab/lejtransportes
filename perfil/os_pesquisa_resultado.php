@@ -101,6 +101,7 @@ $query_lista = mysqli_query($con,$sql_lista);
 								<td>O.S.</td>
 								<td>Cliente</td>
 								<td>Condutor</td>
+								<td>Valor Cliente</td>
 								<td>Valor condutor</td>
 								<td>Data</td>
 								<td></td>
@@ -127,6 +128,7 @@ $query_lista = mysqli_query($con,$sql_lista);
 								echo "<td class='list_description'>".$os['numero_os']."</td>";
 								echo "<td class='list_description'>".$cliente."</td>";
 								echo "<td class='list_description'>".$condutor['nome']."</td>";
+								echo "<td class='list_description'>".dinheiroParaBr($os['valor_cliente'])."</td>";
 								echo "<td class='list_description'>".dinheiroParaBr($os['valor_condutor'])."</td>";
 								echo "<td class='list_description'>".exibirDataBr($os['data'])."</td>";
 								echo "<td class='list_description'>
