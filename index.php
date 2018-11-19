@@ -87,7 +87,7 @@ if(isset($_POST['login_adm']))
 						<form method="POST" action="index.php" class="form-horizontal" role="form">
 							<div class="form-group">
 								<div class="col-md-offset-4 col-md-4">
-									<label>E-mail</label>
+									<label>Cliente</label>
 									<input type="text" name="login" class="form-control" maxlength="120">
 								</div>
 							</div>
